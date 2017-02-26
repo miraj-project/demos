@@ -3,15 +3,12 @@
             [clojure.pprint :as pp]
             [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.polymer.Protocols :as protocols]
-            [miraj.polymer.paper :as paper]
-            ;; [miraj.polymer.paper.behavior :as behaviors]
             [miraj.polymer.Events :as events]
-            [miraj.polymer.dom :as dom]
+            [miraj.polymer.Protocols :as protocols]
 
             ;; for testing only:
             [miraj.compiler :as wc]
-            [miraj.co-dom :as x]
+            [miraj.co-dom :as codom]
             :reload))
 
 ;;(println "loading org.example.greetings.arrival")
@@ -22,7 +19,8 @@
   "HelloProps docstring here"
   (^Boolean bool-b true :read-only)
   (^Number ^{:doc "number y docstring"} y 99)
-  (^String greeting "Hello, Miraj!" (fn [new old] (.log js/console (str "MSG CHANGE: " new)))))
+  ;; the greeting property will be referenced from the codom
+  (^String greeting "Hello from Miraj!" (fn [new old] (.log js/console (str "MSG CHANGE: " new)))))
 
 (miraj/defweb-codom hello-codom
   "hello-codom docstring"
@@ -33,11 +31,10 @@
    (h/style ":host {display: block; width: 50%; border:thin black solid;} span {background-color:#E0F2F1;}")
    (h/style ":host h1, :host h2 {text-align:center;}")
    (h/h1 "Hello!")
-   (h/h2 ::special.page-title :greeting)
+   (h/h2 ::special.page-title :greeting) ;; :greeting == {{greeting}}, 2-way binding
    (h/span ::.paper-font-body2 "Update text to change the greeting.")
-   ;; Listens for "input" event and sets greeting to <input>.value
-   (h/input {:class "paper-font-body2" :value :input->greeting})
-   #_(paper/button "hi")))
+   ;; Listens for "input" event and sets {{greeting}} to <input>.value
+   (h/input {:class "paper-font-body2" :value :input->greeting})))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (miraj/defcomponent [hello hello-world]
@@ -82,24 +79,19 @@
   "GoodbyeProps docstring here"
   (^Boolean bool-b true :read-only)
   (^Number ^{:doc "number y docstring"} y 99)
-  (^String greeting "Goodbye, Miraj!" (fn [new old] (.log js/console (str "MSG CHANGE: " new)))))
+  (^String greeting "Goodbye from Miraj!" (fn [new old] (.log js/console (str "MSG CHANGE: " new)))))
 
 (miraj/defweb-codom goodbye-codom
   "goodbye-codom docstring"
   [greeting]
-  ;; (:require [miraj.polymer.paper :as paper :refer [button]])
-  ;; (:style  '(styles.shared shared-styles))
   (:codom
    (h/style ":host {display: block; width: 50%; border:thin red solid;} span {background-color:#DCEDC8;}")
    (h/style ":host h1, :host h2 {text-align:center;}")
+   (h/style "#foo {display:block; margin-left: auto; margin-right: auto;}")
+
    (h/h1 "Goodbye!")
    (h/h2 ::special.page-title :greeting)
-   (h/span ::.paper-font-body2 "Update text to change the greeting.")
-   ;; Listens for "input" event and sets greeting to <input>.value
-   (h/input {:class "paper-font-body2" :value :input->greeting})
-   #_(paper/button "hi")))
-
-
+   (h/input {:id "foo" :class "paper-font-body2" :value :input->greeting})))
 
 (miraj/defcomponent [goodbye goodbye-world]
   "custom component: miraj.demo.hello-world/goodbye => <goodbye-world>"
