@@ -1,0 +1,4 @@
+= extensions demos
+
+Examples demonstrating definitions of component extensions (a/k/a
+Polymer "behaviors").

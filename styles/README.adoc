@@ -1,0 +1,3 @@
+= styles demos
+
+Examples demonstrating definitions of style components.

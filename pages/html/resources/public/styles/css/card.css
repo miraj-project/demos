@@ -1,0 +1,17 @@
+/* card.css */
+
+#cards {
+    @apply(--layout-vertical);
+    @apply(--center-justified);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+paper-card {
+    width: 100%;
+    margin-bottom: 16px;
+    background-color: #80CBC4; /* var(--paper-teal-100); */
+    /* --paper-card-background-color: #80CBC4; */
+}
+.card-actions {text-align:center;margin-left:auto;margin-right:auto;}

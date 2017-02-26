@@ -1,0 +1,68 @@
+<!-- shared styles for all elements and index.html -->
+
+<dom-module id="button">
+  <template>
+    <style>
+  #container {
+    display: flex;
+  }
+  paper-button {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  paper-button.pink {
+    color: var(--paper-pink-a200);
+    --paper-button-ink-color: var(--paper-pink-a200);
+  }
+  paper-button.pink:hover {
+    background-color: var(--paper-pink-100);
+  }
+  paper-button.indigo {
+    background-color: var(--paper-indigo-500);
+    color: white;
+    --paper-button-raised-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+  }
+  paper-button.indigo:hover {
+    background-color: var(--paper-indigo-400);
+  }
+  paper-button.green {
+    background-color: var(--paper-green-500);
+    color: white;
+  }
+  paper-button.green[active] {
+    background-color: var(--paper-red-500);
+  }
+  paper-button.disabled {
+    color: white;
+  }
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="card">
+  <template>
+    <style>
+h1 {text-align:center}
+
+#cards {
+    @apply(--layout-vertical);
+    @apply(--center-justified);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+paper-card {
+    width: 100%;
+    margin-bottom: 16px;
+    --paper-card-background-color: var(--paper-teal-100);
+}
+.card-actions {text-align:center;margin-left:auto;margin-right:auto;}
+    </style>
+  </template>
+</dom-module>

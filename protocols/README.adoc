@@ -1,0 +1,4 @@
+= protocol demos
+
+Examples demonstrating definitions of component protocols (a/k/a
+Polymer event listening).
