@@ -2,7 +2,7 @@
 (def +version+ "0.1.0-SNAPSHOT")
 
 (set-env!
- :asset-paths #{"resources/public"}
+ :resource-paths #{"resources/public"}
  :source-paths   #{"src/clj"}
 ;; :resource-paths #{"src/clj/main"}
 
@@ -11,10 +11,10 @@
  ;;                "central" "http://repo1.maven.org/maven2/"}
 
  :checkouts '[[miraj/core "0.1.0-SNAPSHOT"]
-             [miraj/co-dom "0.1.0-SNAPSHOT"]
-             [tmp.components/basic "0.1.0-SNAPSHOT"]
-             [tmp.components/greeter "0.1.0-SNAPSHOT"]
-             [tmp.components/salutations "0.1.0-SNAPSHOT"]]
+             [miraj/co-dom "0.1.0-SNAPSHOT"]]
+             ;; [tmp.components/basic "0.1.0-SNAPSHOT"]
+             ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
+             ;; [tmp.components/salutations "0.1.0-SNAPSHOT"]]
 
  :dependencies   '[[org.clojure/clojure "RELEASE" :scope "runtime"]
                    [org.clojure/math.numeric-tower "0.0.4"]
@@ -34,9 +34,9 @@
                    [miraj.polymer/iron "1.2.3-SNAPSHOT"]
 
                    ;; local components
-                   [tmp.components/basic "0.1.0-SNAPSHOT"]
-                   [tmp.components/greeter "0.1.0-SNAPSHOT"]
-                   [tmp.components/salutations "0.1.0-SNAPSHOT"]
+                   ;; [tmp.components/basic "0.1.0-SNAPSHOT"]
+                   ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
+                   ;; [tmp.components/salutations "0.1.0-SNAPSHOT"]
                    ;; [adzerk/boot-test "1.0.7" :scope "test"]
 
                    ;; [javax.servlet/servlet-api "2.5"]
@@ -126,14 +126,16 @@
   "compile, serve"
   []
   (comp
-   (serve :dir "target")
+   (serve) ;; :dir "target")
    (watch) ;; :verbose true)
-   (cljs-repl)
-   (reload) ;; :port 9001)
    (notify :audible true)
-   (miraj/compile :debug true)
-   (miraj/link    :debug true)
-   (target :no-clean true)
+   (cljs-repl)
+   (refresh)
+   (miraj.boot-miraj/compile :keep true :debug true :pages true)
+   (miraj.boot-miraj/link    :debug true :pages true)
+   (reload) ;; :port 9001)
+   (target)
    (cljs)
-   #_(wait)))
+   (target :no-clean true)))
+
 

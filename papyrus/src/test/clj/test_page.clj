@@ -1,18 +1,16 @@
-(ns hello-world.core
+(ns test-page
   (:require [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.polymer.paper :as paper :refer [button card]]
-            [miraj.polymer.paper.styles :as pstyles :refer [color]]
-            [miraj.polymer.iron :as iron :refer [icons icon]]
-            ;; [miraj.demo.hello-world-html :as greeter] ; :refer :all] ; [hello]]
-            [miraj.demo.basic :as greeter] ; :refer :all] ; [hello]]
+            [miraj.demo.papyrus :as papyrus :refer [button card]]
 
             ;; for testing only:
             [miraj.compiler :as wc]
             [miraj.co-dom :as x]
             :reload))
 
-(miraj/defpage index
+(println "loading test-page")
+
+(miraj/defpage ^{:base "/"} index
   "Hello World Demo Page."
 
   ;; html metadata first
@@ -26,12 +24,16 @@
    h1 {text-align:center;}")
 
   (:body
-   (h/h1 "Hello from index page!")
+   (h/h1 "Papyrus Test Page")
 
-   (h/h2 "Here's a greeting component:")
-   (greeter/hello {:foo "hi there!!"})
-   ;; (h/h2 "Here's a farewell component:")
-;;   (greeter/goodbye)
+   (h/div
+    (h/h2 "Here's a papyrus button:")
+    (papyrus/button))
+
+   (h/div
+    (h/h2 "Here's a papyrus card:")
+    (papyrus/card))
+
    ))
 
 ;; (stencil.loader/set-cache (clojure.core.cache/ttl-cache-factory {} :ttl 0))

@@ -1,4 +1,4 @@
-(def +project+ 'tmp.miraj.demos.pages/hello-world)
+(def +project+ 'tmp.miraj.examples.pages/work)
 (def +version+ "0.1.0-SNAPSHOT")
 
 (set-env!
@@ -11,32 +11,23 @@
  ;;                "central" "http://repo1.maven.org/maven2/"}
 
  :checkouts '[[miraj/core "0.1.0-SNAPSHOT"]
-             [miraj/co-dom "0.1.0-SNAPSHOT"]
-             [tmp.components/basic "0.1.0-SNAPSHOT"]
-             [tmp.components/greeter "0.1.0-SNAPSHOT"]
-             [tmp.components/salutations "0.1.0-SNAPSHOT"]]
+             [miraj/co-dom "0.1.0-SNAPSHOT"]]
+             ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
+             ;; [tmp.components/salutations "0.1.0-SNAPSHOT"]]
 
  :dependencies   '[[org.clojure/clojure "RELEASE" :scope "runtime"]
-                   [org.clojure/math.numeric-tower "0.0.4"]
-
                    [org.clojure/clojurescript "1.9.473"]
-                   [hipo "0.5.2"]
-                   [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
-                   [adzerk/boot-cljs-repl   "0.3.3"] ;; latest release
-                   [com.cemerick/piggieback "0.2.1"  :scope "test"]
-                   [weasel                  "0.7.0"  :scope "test"]
-                   [org.clojure/tools.nrepl "0.2.12" :scope "test"]
+                   [org.clojure/math.numeric-tower "0.0.4"]
 
                    [miraj/core "0.1.0-SNAPSHOT"]
                    [miraj/co-dom "0.1.0-SNAPSHOT"]
                    [miraj/html "5.1.0-SNAPSHOT"]
-                   [miraj.polymer/paper "1.2.3-SNAPSHOT"]
-                   [miraj.polymer/iron "1.2.3-SNAPSHOT"]
+                   ;; [miraj.polymer/paper "1.2.3-SNAPSHOT"]
+                   ;; [miraj.polymer/iron "1.2.3-SNAPSHOT"]
 
                    ;; local components
-                   [tmp.components/basic "0.1.0-SNAPSHOT"]
-                   [tmp.components/greeter "0.1.0-SNAPSHOT"]
-                   [tmp.components/salutations "0.1.0-SNAPSHOT"]
+                   ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
+                   ;; [tmp.components/salutations "0.1.0-SNAPSHOT"]
                    ;; [adzerk/boot-test "1.0.7" :scope "test"]
 
                    ;; [javax.servlet/servlet-api "2.5"]
@@ -44,13 +35,14 @@
                    [garden "1.3.2"]
 
                    [pandeiro/boot-http "0.7.3" :scope "test"]
-                   [compojure/compojure "1.4.0"]
-                   [ring/ring-core "1.4.0"]
-                   [ring/ring-devel "1.4.0"]
-                   [ring/ring-servlet "1.4.0"]
-                   [ring/ring-defaults "0.1.5"]
-                   [ns-tracker/ns-tracker "0.3.0" :scope "test"]
+                   ;; [compojure/compojure "1.4.0"]
+                   ;; [ring/ring-core "1.4.0"]
+                   ;; [ring/ring-devel "1.4.0"]
+                   ;; [ring/ring-servlet "1.4.0"]
+                   ;; [ring/ring-defaults "0.1.5"]
+                   ;; [ns-tracker/ns-tracker "0.3.0" :scope "test"]
 
+                   [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
 
                    [boot/core "RELEASE" :scope "test"]
                    [adzerk/boot-reload "0.5.1" :scope "test"] ;; cljs
@@ -66,8 +58,8 @@
 
 (require '[boot-bowdlerize :as b]
          '[adzerk.boot-cljs      :refer [cljs]]
-         '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
          '[miraj.boot-miraj :as miraj]
+         '[adzerk.boot-reload :as cljs :refer [reload]]
          '[boot.task.built-in]
          '[pandeiro.boot-http :refer :all]
          '[samestep.boot-refresh :refer [refresh]]
@@ -86,19 +78,18 @@
        :version     +version+
        :description "miraj/defweb-page example code"
        :license     {"EPL" "http://www.eclipse.org/legal/epl-v10.html"}}
- repl {:port 8899})
+ repl {:port 8080})
 
-(deftask build
-  "compile, pom, jar, install"
+(deftask dev
+  "watch etc."
   []
-  (comp
-   (miraj/compile :debug true)
-   (miraj/link    :debug true)
-   (cljs)
-   (target)))
-   ;; (pom)
-   ;; (jar)
-   ;; (install)))
+;  (set-env! :source-paths #(conj % "src/test/clj"))
+  (comp (serve)
+        (watch)
+        (notify :audible true)
+        (miraj/compile :pages true :namespace #{'miraj.html.demos.style.imported}
+                       :debug true :keep true)
+        (target)))
 
 (deftask monitor
   "watch notivy compile, pom, jar, install"
@@ -128,12 +119,14 @@
   (comp
    (serve :dir "target")
    (watch) ;; :verbose true)
-   (cljs-repl)
-   (reload) ;; :port 9001)
    (notify :audible true)
-   (miraj/compile :debug true)
-   (miraj/link    :debug true)
-   (target :no-clean true)
+   (cljs/reload) ;; :port 9001)
+   ;; (miraj/compile :all true :pprint true :verbose true)
+   (miraj/compile :namespace #{'work.pages.minimal}
+                  :pages true
+                  :debug true)
+   (miraj/link :pages true :debug true)
    (cljs)
+   (target :no-clean true)
    #_(wait)))
 
