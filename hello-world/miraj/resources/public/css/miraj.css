@@ -1,0 +1,10 @@
+/* miraj.css */
+
+h1, h2 {text-align:center;}
+
+h2 {background-color: #80DEEA;}
+
+#main {background-color: #A5D6A7;
+       text-align:center;}
+
+.foo {:text-align: center;}

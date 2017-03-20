@@ -1,0 +1,36 @@
+<!-- This file is analogous to a makefile that runs the linker. -->
+
+
+  <!-- ;; (:require [miraj.demos.hello-world.polymer.sweetest.core]) ;; cljs -->
+  <!-- ;; the problem with this is that :require (and :import too) involves -->
+  <!-- ;; lexical deps, and js code is not a lexical dependency of HTML, -->
+  <!-- ;; except for the href in <script>.  should we even mention -->
+  <!-- ;; semantic, non-lexical deps in the source text?  no; the text of -->
+  <!-- ;; the program should be self-contained.  compare C: source code -->
+  <!-- ;; does not mention linkage. -->
+
+  <!-- ;; but HTML, the language, does require explicit reference to assets -->
+  <!-- ;; needed, albeit in <head>.  but <head> is like a link -->
+  <!-- ;; specification, and miraj removes it from the program.  we can put -->
+  <!-- ;; all needed <head> stuff in an HTML file and link import it, but -->
+  <!-- ;; at a minimum we need to refer to at least that file. -->
+
+  <!-- ;; we can hide this by defaulting to a filename by convention.  if -->
+  <!-- ;; the page is foo.bar/baz, then the import file is -->
+  <!-- ;; foo/bar/baz/imports.html or similar.  just like we do for cljs -->
+  <!-- ;; code - use the same namespace for page html, import html, and -->
+  <!-- ;; cljs:  foo.bar.baz interpreted multiple ways: -->
+
+  <!-- ;;  foo/bar/baz.clj   (source) -->
+  <!-- ;;  foo/bar/baz.html  (generated) -->
+  <!-- ;;  foo/bar/baz/imports.html    (user-supplied, link imported) -->
+  <!-- ;;  foo/bar/baz.cljs  (or foo/bar/baz/core.cljs)  (generated) -->
+  <!-- ;;  foo/bar/baz/delegate.cljs   (required by baz.cljs) -->
+
+
+<!-- maybe a better analogy than c linkage is clojure tagged reader literals.  clojure looks for data_readers.clj at the classpath root and reads it if if finds it.  similarly, miraj-produced webpages will try to load the imports.html file. -->
+
+
+<link rel="import" href="/js/custom-elements.min.js" type="text/javascript">
+
+<script src="/js/sweetest.js"></script>
