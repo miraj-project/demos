@@ -5,9 +5,11 @@
             [clojure.java.io :as io]
             :reload))
 
-(defpage index
+(println "loading sweeter")
+
+(defpage
   "sweeter html demo"
-  #::h{:title "Hello World (sweeter)"
+  #::h{:title "Hello world (sweeter)"
        :description "A page demonstrating miraj html programming"}
   (:css "/css/html.css")
   (:body
@@ -35,7 +37,7 @@
 ;; (spit filename (serialize index)))
 
 
-(binding [miraj/*debug* true
+#_(binding [miraj/*debug* true
           miraj/*verbose* true
           miraj/*keep* true
           miraj/*pprint* true
@@ -53,3 +55,5 @@
    ))
 
 ;;(-> *ns* clojure.core/meta keys)
+
+(println "loaded sweeter")

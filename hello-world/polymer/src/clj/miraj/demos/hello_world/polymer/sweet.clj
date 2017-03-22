@@ -31,12 +31,12 @@
 ;; print to file  (in cli: use boot.miraj/compile)
 ;; this will write to *compile-path*/<ns>/<page>.html,
 ;; i.e. target/miraj/demos/hello_world/polymer/sweet/index.htmnl
-(binding [miraj/*debug* true
+#_(binding [miraj/*debug* true
           miraj/*verbose* true
           miraj/*keep* true
           miraj/*pprint* true
           *compile-path* "target"]
-  (miraj/compile ;;:namespaces #{*ns*}
+  (miraj/mcc ;;:namespaces #{*ns*}
                  ;;:pages ['index]
                  :page (symbol (str (ns-name *ns*)) "index")
                  ))

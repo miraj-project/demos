@@ -2,15 +2,13 @@
   (:require [miraj.co-dom :refer [pprint serialize]]
             [miraj.html :as h :refer :all]
             [miraj.core :as miraj :refer [mcc defpage]] ;; normalize]]
-
-            [clojure.tools.namespace.repl :refer [refresh set-refresh-dirs]]
             [clojure.java.io :as io]
             :reload))
 
 ;; sweetest: use miraj.html functions, plus miraj.core defpage etc.,
 ;; and remove references to external dependencies from program text.
 
-(defpage index
+(defpage
   "sweetest html demo"
   ;; html metadata  (NB: #::h == #:miraj.html)
   #::h{:title "Hello World (sweetest html)"
@@ -32,7 +30,7 @@
 ;; (serialize index)
 ;; (pprint index)
 
-(binding [miraj/*debug* true
+#_(binding [miraj/*debug* true
           miraj/*verbose* true
           miraj/*keep* true
           miraj/*pprint* true

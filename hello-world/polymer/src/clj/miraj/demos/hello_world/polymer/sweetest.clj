@@ -5,7 +5,7 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
-(defpage index
+(defpage ;; index
   "sweetest polymer demo"
   (:require [miraj.polymer.paper :as paper :refer [card]])
 
@@ -19,7 +19,7 @@
                          (paper/button :#btn!raised "Click me"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(binding [miraj/*debug* true
+#_(binding [miraj/*debug* true
           miraj/*verbose* true
           miraj/*keep* true
           miraj/*pprint* true

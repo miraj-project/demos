@@ -5,7 +5,7 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
-(defpage index
+(defpage ;; index
   "demo"
   (:require [miraj.polymer.paper :as paper :refer [card]])
   (:import  [[html.hello-world polymer]])
@@ -21,12 +21,12 @@
                                        "Some action"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(binding [miraj/*debug* true
+#_(binding [miraj/*debug* true
           miraj/*verbose* true
           miraj/*keep* true
           miraj/*pprint* true
           *compile-path* "target"]
-  (miraj/compile ;;:namespaces #{*ns*}
+  (miraj/mcc ;;:namespaces #{*ns*}
                  ;;:pages ['index]
                  :page (symbol (str (ns-name *ns*)) "index")
                  ))
