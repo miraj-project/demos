@@ -34,7 +34,6 @@
 
 (let [filename "target/miraj/demos/hello_world/html/bitterest.html"]
   (io/make-parents filename)
-  (spit filename (with-out-str (pprint index))))
-  ;; (spit filename (serialize index)))
+  (spit filename (with-out-str (-> index pprint print))))
 
 

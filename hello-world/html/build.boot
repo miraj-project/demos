@@ -36,15 +36,19 @@
 (deftask build
   "build"
   []
-  ;; (set-env! :asset-paths #(conj % "dev-resources"))
+  ;; compilation is only for defpage, which these three do not use:
+  (require '[miraj.demos.hello-world.html.bitterest]
+           '[miraj.demos.hello-world.html.bitter]
+           '[miraj.demos.hello-world.html.sweet])
   (comp
    (miraj/compile :page 'miraj.demos.hello-world.html.sweeter
                   :polyfill :lite
                   :debug true)
-   #_(miraj/compile :page 'miraj.demos.hello-world.html.sweetest
+   (miraj/compile :page 'miraj.demos.hello-world.html.sweetest
                   :polyfill :lite
                   :imports ["sweetest/imports.html"]
-                  :debug true)))
+                  :debug true)
+   (target :no-clean true)))
 
 (deftask dev
   "repl development."
@@ -54,6 +58,5 @@
         (serve :dir "target" :port 3000)
         (watch)
         (notify :audible true)
-        (build)
-        (target)))
+        (build)))
 

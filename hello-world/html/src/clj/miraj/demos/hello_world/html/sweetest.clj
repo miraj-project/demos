@@ -17,7 +17,7 @@
   (:body
    (h/h1 :!centered
          (h/span :.greeting "Hello")
-         (h/span {:$color "green"} " World")
+         (h/span {:miraj.style/color "green"} " World")
          (h/span " (sweetest html)!"))
    (h/div :#main!centered
           (h/span :!centered

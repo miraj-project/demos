@@ -5,7 +5,7 @@
 
 ;; bitter: use only co-dom primitives, plus special attribute
 ;; keywords for id (:#foo), class (:.bar.baz), boolean
-;; attributes (:!centered), and styles (:$color)
+;; attributes (:!centered), and styles (e.g. :miraj.style/color)
 
 (def index
   (element :html {}
@@ -16,7 +16,7 @@
                     (element :h1 :!centered
                              (element :span :.greeting
                                       "Hello")
-                             (element :span {:$color "green"}
+                             (element :span {:miraj.style/color "green"}
                                       " World")
                              (element :span " (bitter)!"))
                     (element :div :#main!centered
@@ -35,7 +35,7 @@
 
 (let [filename "target/miraj/demos/hello_world/html/bitter.html"]
   (io/make-parents filename)
-  (spit filename (with-out-str (pprint index))))
-  ;; (spit filename (serialize index)))
+  (spit filename (with-out-str (-> index pprint print))))
+
 
 

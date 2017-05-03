@@ -14,7 +14,7 @@
         (body
          (h1 :!centered
              (span :.greeting "Hello")
-             (span {:$color "green"} " World")
+             (span {:miraj.style/color "green"} " World")
              (span " (sweet)!"))
          (div :#main!centered
               (span :!centered
@@ -32,6 +32,6 @@
 
 (let [filename "target/miraj/demos/hello_world/html/sweet.html"]
   (io/make-parents filename)
-  (spit filename (with-out-str (pprint index))))
+  (spit filename (with-out-str (-> index pprint print))))
 ;; (spit filename (serialize index)))
 
