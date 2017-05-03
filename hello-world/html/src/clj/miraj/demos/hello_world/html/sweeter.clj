@@ -1,22 +1,33 @@
 (ns miraj.demos.hello-world.html.sweeter
-  (:require [miraj.co-dom :refer [pprint serialize]]
+  (:require [miraj.co-dom :as codom :refer [pprint serialize]]
             [miraj.html :as h :refer :all]
-            [miraj.core :as miraj :refer [mcc defpage]] ;; normalize]]
+            [miraj.style :as s]
+            [miraj.core :as miraj :refer [mcc defpage normalize optimize]]
             [clojure.java.io :as io]
             :reload))
 
 (println "loading sweeter")
 
+;; this will produce <ns>.html, i.e. miraj/demos/hello_world/html/sweeter.html
 (defpage
   "sweeter html demo"
+  (:require [miraj.polymer.paper :as paper :refer [card]]
+            [miraj.html :as h :refer :all])
+
   #::h{:title "Hello world (sweeter)"
        :description "A page demonstrating miraj html programming"}
   (:css "/css/html.css")
   (:body
-   (h/h1 :!centered
+   (miraj.html/h1 :!centered
          (h/span :.greeting "Hello")
-         (h/span {:$color "green"} " World")
+         (h/span :#foo1 {::s/color "blue"
+                         ::s/before {:content "foo"}
+                         ::s/after {:content "bar"}
+                         ::s/hover {:color "green!important"
+                                    :background-color "red"}}
+                 " World ")
          (h/span " (sweeter)!"))
+
    (h/div :#main!centered
           (h/span :!centered
                   (h/button :.foo
@@ -24,36 +35,38 @@
                             "click me")))
    (h/script {:type "text/javascript" :src "/js/html.js"})))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; repl:
 
-;; (serialize index)
-;; (pprint index)
+;; (def pg (-> *ns* clojure.core/meta :miraj/miraj :miraj/codom))
 
-;; (let [filename "target/miraj/demos/hello_world/html/sweeter.html"]
+;; (-> *ns* normalize)
+
+;; (-> pg serialize)
+;; (-> pg pprint)
+
+;; (def pgstr  (-> *ns* normalize serialize))
+;; (print pgstr)
+;; (def pgpretty (pprint pg))
+;; (print pgpretty)
+
+;; (let [filename "target/miraj/demos/hello_world/html/sweeter-x.html"]
 ;;   (io/make-parents filename)
-;;   (spit filename (with-out-str (pprint index))))
-;; (spit filename (serialize index)))
+;;   (spit filename (with-out-str (-> *ns*
+;;                                    normalize
+;;                                    optimize
+;;                                    pprint
+;;                                    print))))
 
-
-#_(binding [miraj/*debug* true
-          miraj/*verbose* true
-          miraj/*keep* true
-          miraj/*pprint* true
-          *compile-path* "target"]
-  (miraj/mcc ;;:namespaces #{*ns*}
-   ;;:pages ['index]
-   ;; :page can be a var, an ns, or a symbol
-   ;; :page (var index)
-   ;; or
-   :page 'miraj.demos.hello-world.html.sweeter/index
-   ;;:page *ns*
-   ;; or
-   ;; :page 'miraj.demos.hello-world.html.sweeter
-   :polyfill :lite
-   ))
-
-;;(-> *ns* clojure.core/meta keys)
+;; (binding [miraj/*debug* true
+;;           miraj/*verbose* true
+;;           miraj/*keep* true
+;;           codom/*pprint* true
+;;           *compile-path* "target"]
+;;   (miraj/mcc :page *ns* ;; on the cli, use the ns sym: 'miraj.demos.hello-world.html.sweeter
+;;              :polyfill :lite
+;;              :debug true))
 
 (println "loaded sweeter")

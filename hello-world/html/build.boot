@@ -5,13 +5,16 @@
  :asset-paths #{"resources/public"}
  :source-paths   #{"src/clj"}
 
- :checkouts '[[miraj/co-dom "0.1.0-SNAPSHOT"]
+ :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
               [miraj/core "0.1.0-SNAPSHOT"]]
 
  :dependencies   '[[org.clojure/clojure "RELEASE"]
-                   [miraj/co-dom "0.1.0-SNAPSHOT"]
+                   [miraj/co-dom "1.0.0-SNAPSHOT"]
                    [miraj/html "5.1.0-SNAPSHOT"]
                    [miraj/core "0.1.0-SNAPSHOT"]
+
+                   [miraj.polymer/paper "1.2.3-SNAPSHOT"]
+
                    [pandeiro/boot-http "0.7.3" :scope "test"]
 
                    [miraj/boot-miraj "0.1.0-SNAPSHOT" :scope "test"]
@@ -38,7 +41,7 @@
    (miraj/compile :page 'miraj.demos.hello-world.html.sweeter
                   :polyfill :lite
                   :debug true)
-   (miraj/compile :page 'miraj.demos.hello-world.html.sweetest
+   #_(miraj/compile :page 'miraj.demos.hello-world.html.sweetest
                   :polyfill :lite
                   :imports ["sweetest/imports.html"]
                   :debug true)))
@@ -47,8 +50,8 @@
   "repl development."
   []
   (comp (cider)
-        (repl :server true)
-        (serve :dir "target")
+        (repl :server true :port 8080)
+        (serve :dir "target" :port 3000)
         (watch)
         (notify :audible true)
         (build)
