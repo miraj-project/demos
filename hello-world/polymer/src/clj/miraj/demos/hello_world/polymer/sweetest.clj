@@ -5,7 +5,9 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
-(defpage ;; index
+;; sweetest: default is to import <page>/imports.html
+
+(defpage
   "sweetest polymer demo"
   (:require [miraj.polymer.paper :as paper :refer [card]])
 

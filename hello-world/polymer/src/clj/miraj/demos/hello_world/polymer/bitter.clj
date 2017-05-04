@@ -3,15 +3,18 @@
             [miraj.html :refer :all :exclude [button]]
             [miraj.polymer.paper :as paper :refer [button]]
             [miraj.co-dom :as codom :refer [pprint serialize]]
+            [clojure.java.io :as io]
             :reload))
 
+;; we can use polymer components with plain html, no miraj sweetness
+;; we have to spell everything out explicitly:
 (def index
   (html
    (head
-    (script {:src "bower_components/webcomponentsjs/webcomponents-lite.min.js"})
-    (link {:rel "import" :href "bower_components/polymer/polymer.html"})
-    (link {:rel "import" :href "bower_components/paper-button/paper-button.html"})
-    (link {:rel "import" :href "bower_components/paper-card/paper-card.html"}))
+    (script {:src "/bower_components/webcomponentsjs/webcomponents-lite.min.js"})
+    (link {:rel "import" :href "/bower_components/polymer/polymer.html"})
+    (link {:rel "import" :href "/bower_components/paper-button/paper-button.html"})
+    (link {:rel "import" :href "/bower_components/paper-card/paper-card.html"}))
 
    (body
     (h1 "Hello World!")
@@ -23,14 +26,16 @@
                           (paper/button {:raised nil
                                          :onclick "handle_click('bitter paper');"}
                                         "Some action"))))
-    (script {:src "js/custom-elements.min.js"})
-    (script {:src "js/miraj.js"}))))
+    (script {:src "/js/custom-elements.min.js"})
+    (script {:src "/js/miraj.js"}))))
+
+;; (-> index clojure.core/meta)
 
 ;; (serialize index)
 ;; (pprint index)
 
-;; (spit "target/bitter.html" (serialize index))
-(spit "target/bitter.html"
-      (with-out-str
-        (codom/pprint index)
-        ))
+;; this page is not compilable since it does not use defpage; we must do it by hand:
+(let [filename "target/miraj/demos/hello_world/polymer/bitter/index.html"]
+  (io/make-parents filename)
+  (spit filename (with-out-str (-> index pprint print))))
+

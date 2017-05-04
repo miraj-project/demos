@@ -5,7 +5,9 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
-(defpage ;; index
+;; sweeter: use import instead of <script>
+
+(defpage
   "demo"
   (:require [miraj.polymer.paper :as paper :refer [card]])
   (:import  [[html.hello-world polymer]])

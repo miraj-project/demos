@@ -5,6 +5,8 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
+;; like bitter, but we use defpage, so the <head> stuff is taken care
+;; of automatically
 (defpage index
   "demo"
   (require [miraj.polymer.paper :as paper :refer [card]])
