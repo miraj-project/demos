@@ -1,4 +1,4 @@
 = Hello World (miraj)
 
-Miraj Hello World using miraj.miraj
+Miraj Hello World using miraj
 
