@@ -1,0 +1,14 @@
+;; sweetest/deps.edn
+{:css [css.sweetest]
+ :js  [js.sweetest
+       "/js/custom-elements.min.js"]
+ :import [[foo.bar baz buz]] ;; /foo/bar/baz.html, /foo/bar/buz.html
+ :style  [[styles.demo sweetest]] ;; /styles.demo.html, module=sweetest
+ :icons [[miraj.polymer.iron communication hardware iron social]
+         [miraj.vaadin vaadin]]
+ ;; :miraj.polymer/icons [[miraj.polymer.iron communication hardware iron social]]
+ ;; :miraj.polymer/icons [[iron communication hardware iron social]
+ ;;                       [miraj.vaadin]]
+ :miraj.polymer/styles [[miraj.polymer.iron.styles demo flex-mixins]
+                        [miraj.polymer.paper.styles color typography]]}
+

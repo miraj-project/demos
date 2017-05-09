@@ -1,0 +1,65 @@
+<!-- sweetest.html -->
+
+<dom-module id="sweetest">
+  <template>
+    <style >
+      /* sweetest.css */
+
+      h1, h2 {text-align:center;}
+
+      #main {background-color: #A5D6A7;
+      text-align:center;}
+
+      paper-card {
+      width: 100%;
+      }
+      .horizontal {
+      @apply(--layout-horizontal);
+      }
+      .justified {
+      @apply(--layout-justified);
+      }
+      .amber {
+      background: var(--paper-amber-900);
+      }
+      .lime {
+      background: var(--paper-lime-500);
+      }
+      .cyan {
+      background: var(--paper-cyan-500);
+      }
+      .dark {
+      background: var(--paper-blue-grey-500);
+      }
+      paper-card.dark, paper-card.amber, paper-card.lime, paper-card.cyan {
+      color: white;
+      --paper-card-header-color: white;
+      }
+      paper-checkbox {
+      display: block;
+      margin-bottom: 4px;
+      --paper-checkbox-label-color: white;
+      --paper-checkbox-unchecked-color: white;
+      }
+      paper-icon-button {
+      color: var(--paper-grey-600);
+      }
+      paper-icon-button.white {
+      color: white !important;
+      }
+
+      .centered {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      iron-icon.star {
+      --iron-icon-width: 16px;
+      --iron-icon-height: 16px;
+      color: var(--paper-amber-500);
+      }
+
+    </style>
+  </template>
+</dom-module>
+

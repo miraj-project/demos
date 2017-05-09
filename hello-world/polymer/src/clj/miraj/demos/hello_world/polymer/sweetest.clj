@@ -5,20 +5,33 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
-;; sweetest: default is to import <page>/imports.html
+;; sweetest: use sweetest/deps.edn
 
 (defpage
   "sweetest polymer demo"
-  (:require [miraj.polymer.paper :as paper :refer [card]])
+  (:require [miraj.polymer.iron :as iron :refer [collapse icon demo-snippet]]
+            [miraj.polymer.paper :as paper :refer [card]])
+
+  ;; these are lexical dependencies, but data, not functions?
+  ;; (ditto for images?)
+  ;; (:icons [[miraj.polymer.iron communication hardware iron social]
+  ;;          [miraj.polymer.iron.icons communication hardware iron social]
+  ;;          [miraj.vaadin vaadin]])
+
+  (:styles [[miraj.polymer.iron.icons communication hardware iron social]
+            [miraj.polymer.iron.styles demo flex-mixins]
+            [miraj.polymer.paper.styles color typography]])
 
   (:body
-   (h1 "Hello World!")
+   (h1 :.amber "Hello World!")
    (h2 "(from miraj.polymer.paper, sweetest)")
-   (div :#cards
+   (div :#cards.vertical-section-container.centered
         (paper/card {:heading "Hello, you ol' Card!"}
-                    (div :.card-content "Some content")
-                    (div :.card-actions
-                         (paper/button :#btn!raised "Click me"))))))
+                    (div :.card-content
+                         (iron/icon :.star {:icon "star"})
+                         "Some content")
+                    (div :.card-actions.centered
+                         (paper/button :#btn.centered!raised "Click me"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #_(binding [miraj/*debug* true

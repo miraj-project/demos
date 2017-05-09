@@ -13,6 +13,7 @@
                    [miraj/html "5.1.0-SNAPSHOT"]
                    [miraj/core "0.1.0-SNAPSHOT"]
                    [miraj.polymer/paper "1.2.3-SNAPSHOT"]
+                   [miraj.polymer/iron "1.2.3-SNAPSHOT"]
                    [pandeiro/boot-http "0.7.3" :scope "test"]
                    [miraj/boot-miraj "0.1.0-SNAPSHOT" :scope "test"]
                    ])
@@ -31,17 +32,19 @@
   "build"
   []
   ;; (set-env! :asset-paths #(conj % "dev-resources"))
-  (require '[miraj.demos.hello-world.polymer.bitter])
+  ;; (require '[miraj.demos.hello-world.polymer.bitter])
   (comp
-   (miraj/compile :page 'miraj.demos.hello-world.polymer.sweet/index
+   #_(miraj/compile :page 'miraj.demos.hello-world.polymer.sweet/index
                   :polyfill :lite
                   :debug true)
-   (miraj/compile :page 'miraj.demos.hello-world.polymer.sweeter
+   #_(miraj/compile :page 'miraj.demos.hello-world.polymer.sweeter
                   :polyfill :lite
                   :debug true)
    (miraj/compile :page 'miraj.demos.hello-world.polymer.sweetest
                   :polyfill :lite
-                  :imports ["sweetest/imports.html"]
+                  :debug true)
+   (miraj/link    :pages #{'miraj.demos.hello-world.polymer.sweetest}
+                  ;; :assets :polymer
                   :debug true)))
 
 (deftask dev

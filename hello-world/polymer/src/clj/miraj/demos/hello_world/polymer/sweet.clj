@@ -1,6 +1,6 @@
 (ns miraj.demos.hello-world.polymer.sweet
   (:require [miraj.core :as miraj :refer [compile-page-nss defpage normalize]]
-            [miraj.html :refer :all :exclude [button]]
+            [miraj.html :as h :refer :all :exclude [button meta]]
             [miraj.co-dom :as codom :refer [pprint serialize]]
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
@@ -10,6 +10,15 @@
 (defpage index
   "demo"
   (require [miraj.polymer.paper :as paper :refer [card]])
+
+  {::h/title"Miraj demo: hello-world"
+   ::h/description "This page demonstrates of a simple miraj webpage."
+   ::h/charset "utf-8"
+   ::h/viewport {::h/width :device-width
+                 ::h/scale {::h/min 0.5
+                            ::h/max 2
+                            ::h/initial 1}
+                 ::h/user-scalable true}}
 
   (:body
    (h1 "Hello World!")
