@@ -8,22 +8,22 @@
 (def index
   (element :html {}
            (element :head {}
-                    (element :title "Hello World (bitterest)")
-                    (element :link {:rel "stylesheet" :href "/css/html.css"}))
+                    (element :title "Hello, Bitterest HTML World!")
+                    (element :link {:rel "stylesheet" :href "/css/bitterest.css"}))
            (element :body
                     (element :h1 {:centered "centered"}
                              (element :span {:class "greeting"}
-                                      "Hello")
+                                      "Hello,")
                              (element :span {:style "color:green;"}
-                                      " World")
-                             (element :span " (bitterest)!"))
+                                      " Bitterest HTML")
+                             (element :span " World!"))
                     (element :div {:id "main" :centered ""}
                              (element :span {:centered ""}
                                       (element :button {:class "foo"
                                                         :onclick "handle_click('bitterest')"}
                                                "click me"))
                              )
-                    (element :script {:src "/js/html.js"}))))
+                    (element :script {:src "/js/bitterest.js"}))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

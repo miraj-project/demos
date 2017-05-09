@@ -11,14 +11,14 @@
 (defpage
   "sweetest html demo"
   ;; html metadata  (NB: #::h == #:miraj.html)
-  #::h{:title "Hello World (sweetest html)"
+  #::h{:title "Hello Sweetest HTML World"
        :description "A page demonstrating miraj html programming"}
-  ;; (:import [[imports sweetest]])
+
   (:body
    (h/h1 :!centered
-         (h/span :.greeting "Hello")
-         (h/span {:miraj.style/color "green"} " World")
-         (h/span " (sweetest html)!"))
+         (h/span :.greeting "Hello,")
+         (h/span {:miraj.style/color "green"} " Sweetest HTML")
+         (h/span " World!"))
    (h/div :#main!centered
           (h/span :!centered
                   (h/button :#btn.foo "click me")))))
@@ -37,8 +37,7 @@
           *compile-path* "target"]
   (miraj/mcc :page (var index)
              :polyfill :lite ;; :full, :imports, :components, :shadow
-             :linkage "imports.html"
              ))
 
 ;; cli:
-;; $ boot miraj/mcc -p miraj.demos.hello-world.html.sweetest/index --polyfill :lite --linkage "imports.html"
+;; $ boot miraj/mcc -p miraj.demos.hello-world.html.sweetest/index --polyfill :lite

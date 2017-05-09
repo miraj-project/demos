@@ -9,6 +9,7 @@
               [miraj/core "0.1.0-SNAPSHOT"]]
 
  :dependencies   '[[org.clojure/clojure "RELEASE"]
+                   ;; [org.clojure/spec.alpha "0.1.108"]
                    [miraj/co-dom "1.0.0-SNAPSHOT"]
                    [miraj/html "5.1.0-SNAPSHOT"]
                    [miraj/core "0.1.0-SNAPSHOT"]
@@ -36,19 +37,28 @@
 (deftask build
   "build"
   []
-  ;; compilation is only for defpage, which these three do not use:
-  (require '[miraj.demos.hello-world.html.bitterest]
-           '[miraj.demos.hello-world.html.bitter]
-           '[miraj.demos.hello-world.html.sweet])
-  (comp
-   (miraj/compile :page 'miraj.demos.hello-world.html.sweeter
-                  :polyfill :lite
-                  :debug true)
-   (miraj/compile :page 'miraj.demos.hello-world.html.sweetest
-                  :polyfill :lite
-                  :imports ["sweetest/imports.html"]
-                  :debug true)
-   (target :no-clean true)))
+  (let [pg 'miraj.demos.hello-world.html.sweeter]
+    ;; compilation is only for defpage, which these three do not use:
+    (require '[miraj.demos.hello-world.html.bitter]
+             '[miraj.demos.hello-world.html.bitterer]
+             '[miraj.demos.hello-world.html.bitterest]
+             ;; NB: spec.alpha broken at the moment
+             ;;:reload-all ;; macros involved, reload is required for interactive dev
+             )
+    (comp
+     (miraj/compile :pages #{pg}
+                    ;; :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{pg}
+                    ;; :assets :polymer  ;; copy assets from jar to resources dir
+                    :debug true)
+     ;; (miraj/compile :pages #{} ;; compile all pages in all nss
+     ;;                :polyfill :lite
+     ;;                :debug true)
+     ;; (miraj/link    :pages #{} ;; link all pages
+     ;;                ;; :assets :polymer  ;; copy assets from jar to resources dir
+     ;;                :debug true)
+     (target :no-clean true))))
 
 (deftask dev
   "repl development."

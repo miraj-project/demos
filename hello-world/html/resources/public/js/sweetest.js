@@ -2,7 +2,7 @@
 
 handleClick = function(e) {
     console.log("sweetest html click");
-    alert("Hello World (sweetest html)!");
+    alert("Hello, Sweetest HTML World!");
 }
 
 var el = document.getElementById("btn");

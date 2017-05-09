@@ -11,30 +11,30 @@
 ;; this will produce <ns>.html, i.e. miraj/demos/hello_world/html/sweeter.html
 (defpage
   "sweeter html demo"
-  (:require [miraj.polymer.paper :as paper :refer [card]]
-            [miraj.html :as h :refer :all])
+  (:require [miraj.html :as h :refer :all])
 
-  #::h{:title "Hello world (sweeter)"
+  #::h{:title "Hello, Sweeter HTML World!"
        :description "A page demonstrating miraj html programming"}
-  (:css "/css/html.css")
+
+  (:css ["/css/sweeter.css"])
+  (:js ["/js/sweeter.js"])
+
   (:body
    (miraj.html/h1 :!centered
-         (h/span :.greeting "Hello")
+         (h/span :.greeting "Hello,")
          (h/span :#foo1 {::s/color "blue"
                          ::s/before {:content "foo"}
                          ::s/after {:content "bar"}
                          ::s/hover {:color "green!important"
                                     :background-color "red"}}
-                 " World ")
-         (h/span " (sweeter)!"))
+                 " Sweeter HMTL ")
+         (h/span "World!"))
 
    (h/div :#main!centered
           (h/span :!centered
-                  (h/button :.foo
+                  (h/button :#btn.foo
                             {:onclick "handle_click('sweeter')"}
-                            "click me")))
-   (h/script {:type "text/javascript" :src "/js/html.js"})))
-
+                            "click me")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
