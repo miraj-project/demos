@@ -42,22 +42,22 @@
     (require '[miraj.demos.hello-world.html.bitter]
              '[miraj.demos.hello-world.html.bitterer]
              '[miraj.demos.hello-world.html.bitterest]
-             ;; NB: spec.alpha broken at the moment
+             ;; NB: spec.alpha breaks :relaod-all at the moment
              ;;:reload-all ;; macros involved, reload is required for interactive dev
              )
     (comp
-     (miraj/compile :pages #{pg}
-                    ;; :polyfill :lite
-                    :debug true)
-     (miraj/link    :pages #{pg}
-                    ;; :assets :polymer  ;; copy assets from jar to resources dir
-                    :debug true)
-     ;; (miraj/compile :pages #{} ;; compile all pages in all nss
-     ;;                :polyfill :lite
+     ;; (miraj/compile :pages #{pg}
+     ;;                ;; :polyfill :lite
      ;;                :debug true)
-     ;; (miraj/link    :pages #{} ;; link all pages
+     ;; (miraj/link    :pages #{pg}
      ;;                ;; :assets :polymer  ;; copy assets from jar to resources dir
      ;;                :debug true)
+     (miraj/compile :pages #{} ;; compile all pages in all nss
+                    :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{} ;; link all pages
+                    ;; :assets :polymer  ;; copy assets from jar to resources dir
+                    :debug true)
      (target :no-clean true))))
 
 (deftask dev
