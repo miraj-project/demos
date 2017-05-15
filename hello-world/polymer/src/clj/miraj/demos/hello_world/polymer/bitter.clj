@@ -34,8 +34,11 @@
 ;; (serialize index)
 ;; (pprint index)
 
+(-> *ns* clojure.core/meta)
+
 ;; this page is not compilable since it does not use defpage; we must do it by hand:
-(let [filename "target/miraj/demos/hello_world/polymer/bitter/index.html"]
+#_(let [filename "target/miraj/demos/hello_world/polymer/bitter/index.html"]
   (io/make-parents filename)
   (spit filename (with-out-str (-> index pprint print))))
+
 

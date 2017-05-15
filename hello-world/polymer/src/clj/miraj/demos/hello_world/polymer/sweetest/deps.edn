@@ -2,8 +2,9 @@
 {:css [css.sweetest]
  :js  [js.sweetest
        "/js/custom-elements.min.js"]
- :import [[foo.bar baz buz]] ;; /foo/bar/baz.html, /foo/bar/buz.html
- :style  [[styles.demo sweetest]] ;; /styles.demo.html, module=sweetest
+ :imports [[foo.bar baz buz]] ;; /foo/bar/baz.html, /foo/bar/buz.html
+ :styles  [[styles.demo sweetest]] ;; /styles/demo.html, module=sweetest
+ :scripots  [[scripts.demo foo bar]] ;; /scripts/demo/foo.js, /scripts/demo/bar.js
  :icons [[miraj.polymer.iron communication hardware iron social]
          [miraj.vaadin vaadin]]
  ;; :miraj.polymer/icons [[miraj.polymer.iron communication hardware iron social]]

@@ -31,21 +31,19 @@
 (deftask build
   "build"
   []
-  ;; (set-env! :asset-paths #(conj % "dev-resources"))
-  ;; (require '[miraj.demos.hello-world.polymer.bitter])
-  (comp
-   #_(miraj/compile :page 'miraj.demos.hello-world.polymer.sweet/index
-                  :polyfill :lite
-                  :debug true)
-   #_(miraj/compile :page 'miraj.demos.hello-world.polymer.sweeter
-                  :polyfill :lite
-                  :debug true)
-   (miraj/compile :page 'miraj.demos.hello-world.polymer.sweetest
-                  :polyfill :lite
-                  :debug true)
-   (miraj/link    :pages #{'miraj.demos.hello-world.polymer.sweetest}
-                  ;; :assets :polymer
-                  :debug true)))
+  (let [pg 'miraj.demos.hello-world.polymer.sweeter]
+    (comp
+     (miraj/compile :pages #{pg}
+                    :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{pg}
+                    :debug true)
+     #_(miraj/compile :pages #{} ;; all pages
+                    :polyfill :lite
+                    :debug true)
+     #_(miraj/link    :pages #{} ;; all pages
+                    ;; :assets :polymer
+                    :debug true))))
 
 (deftask dev
   "repl development."

@@ -5,16 +5,22 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
+
 ;; sweeter: use import instead of <script>
 
 (defpage
   "demo"
   (:require [miraj.polymer.paper :as paper :refer [card]])
-  (:import  [[html.hello-world polymer]])
+
+  (:import [{:href "https://unpkg.com/purecss@0.6.2/build/pure-min.css"
+             :integrity "sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
+             :crossorigin "anonymous"}])
+
+  (:styles  [[styles.demo sweeter]]) ;; /styles.demo.html, module=sweeter
 
   (:body
-   (h1 "Hello World!")
-   (h2 "(from miraj.polymer.paper, sweeter)")
+   (h1 "Hello, Sweeter Polymer World!")
+
    (div :#cards
         (paper/card {:heading "Hello, you ol' Card!"}
                     (div :.card-content "Some content")
