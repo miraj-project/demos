@@ -16,6 +16,7 @@
   #::h{:title "Hello, Sweeter HTML World!"
        :description "A page demonstrating miraj html programming"}
 
+  ;; externel deps - see miraj demos for more syntax
   (:css ["/css/sweeter.css"])
   (:js ["/js/sweeter.js"])
 
