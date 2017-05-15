@@ -1,0 +1,33 @@
+;; sweet/deps.edn
+
+{:css [
+       ;; ;; inlined css
+       ;; "button { background:red; width: 50%; margin: 16px;}"
+
+       ;; ;; inlined, custom style
+       ;; {:custom "button { background:red; width: 50%; margin: 16px;}"}
+
+       ;; raw path syntax
+       ;; ["/css/sweet.css" "/css/sweet2.css"]
+
+       ;; style modules with custom styles (:custom required for main doc css)
+       ;; [styles.modules :custom [foo bar]]
+
+       ;; we can add inline csss to a module reference:
+       [styles.modules :custom [[foo "button {width:50%;height:1in;background:green;}"]
+                                bar]]
+
+       ;; no :custom needed for defcomponent - won't work for defpage
+       ;; [styles.modules foo bar] ;; link /styles/modules.html, include modules foo and bar
+
+       ;; to put <style> in html files without modules, use :imports instead of :css
+
+       ;; map syntax: direct encoding of link attribs (except :rel, defaults to "stylesheet"
+       ;; {:href "https://unpkg.com/purecss@0.6.2/build/pure-min.css"
+       ;;  :integrity "sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
+       ;;  :crossorigin "anonymous"}
+       ;; {:href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"}
+       ]
+
+ :js  ["/js/sweet.js"]}
+

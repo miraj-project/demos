@@ -1,8 +1,18 @@
-<!-- miraj.html -->
+<!-- sweeter.html -->
 
 <!-- Since this file will be loaded by HTML import, we can stuff both styles and scripts into it. -->
 
 <!-- WARNING: live reload (boot-reload) will not reload these resources, you must refresh the page -->
+
+<script>
+handleClick = function(e) {
+    console.log("sweeter polymer click");
+    alert("Hello World (sweeter polymer)!");
+}
+
+var el = document.getElementById("sweeterbtn");
+el.addEventListener("click", handleClick, false);
+</script>
 
 <style>
 h1,h2 {text-align:center;}
@@ -14,8 +24,3 @@ h2 {background-color: #FF8A65;}
 
 *[centered] {:text-align: center;}
 </style>
-
-<script>
-handle_click = function(e) {alert("Hello, Sweet Miraj World!");
-			    console.log("that tickles, sweet!");}
-</script>

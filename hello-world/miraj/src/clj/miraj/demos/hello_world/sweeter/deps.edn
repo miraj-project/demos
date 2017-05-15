@@ -1,2 +1,0 @@
-;; sweeter/deps.edn
-{:imports  [imports.sweet]}

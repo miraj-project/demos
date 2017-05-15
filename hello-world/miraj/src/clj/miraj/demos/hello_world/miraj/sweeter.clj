@@ -1,13 +1,12 @@
-(ns miraj.demos.hello-world.sweet
+(ns miraj.demos.hello-world.miraj.sweeter
   (:require [miraj.core :as miraj]
             [miraj.html :as h :refer :all :exclude [meta]]
-            [miraj.co-dom :as codom :refer [pprint serialize]]
-            :reload))
+            [miraj.co-dom :as codom :refer [pprint serialize]]))
 
 (miraj/defpage
-  "Hello World - Miraj (sweet) Demo Page"
+  "Hello World - Miraj (sweeter) Demo Page"
 
-  {::h/title "Sweet Hello World"
+  {::h/title "Hello, Sweeter Miraj"
    ::h/description "This page demonstrates of a simple miraj webpage."
    ::h/charset "utf-8"
    ::h/viewport {::h/width :device-width
@@ -17,12 +16,13 @@
                ::h/default-style "main-style"
                ::h/pics-label "pics label"}
    ::h/icons [{::h/href "favicon.png" ::h/sizes #{[16 16]} ::h/type "image/png"}
-              {::h/href "mac.icns" ::h/sizes #{[128 128] [512 512] [8192 8192] [32768 32768]}}]}
+              {::h/href "mac.icns" ::h/sizes #{[128 128] [512 512] [8192 8192] [32768 32768]}}]
+   }
 
   (:body
-   (h1 "Hello Sweet Miraj World!")
-   (h2 :#h {:miraj.style/hover {:background-color "#A5D6A7"}} "(sweet)")
+   (h1 "Hello Sweeter Miraj World!")
+   (h2 :#h {:miraj.style/hover {:background-color "#A5D6A7"}} "(sweeter)")
    (div :#main
         (span :!centered
-              (button {:onclick "handle_click()"} "click me")))))
+              (button :#sweeterbtn "click me")))))
 

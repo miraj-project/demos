@@ -48,41 +48,48 @@
   []
   (comp (serve :dir "target")
         (cider)
-        ;; (repl :server true)
+        (repl :server true)
         (watch)
         (notify :audible true)))
 
 (deftask bitter
   "repl development."
   []
-  (let [pg 'miraj.demos.hello-world.bitter]
-    (comp (miraj/compile :page pg
-                         :polyfill :lite
-                         :keep true
-                         :debug true)
-          (miraj/link    :pages #{pg}
-                         :assets :polymer
-                         :debug true)
-          (monitor)
-          (miraj/compile :page pg
-                         :polyfill :lite
-                         :keep true
-                         :debug true)
-          ;; we only need to link once, so long as external deps do not change
-          #_(miraj/link    :pages #{pg}
-                         :debug true)
-          (target))))
-
-(deftask sweet
-  "repl development."
-  []
-  (let [pg 'miraj.demos.hello-world.sweet]
+  (let [pg 'miraj.demos.hello-world.miraj.bitter]
     (comp (miraj/compile :pages #{pg}
                          :polyfill :lite
                          :keep true
                          :debug true)
           (miraj/link    :pages #{pg}
-                         :assets :polymer
+                         ;; :assets :polymer
+                         :debug true)
+          (miraj/compile :pages #{pg}
+                         :polyfill :lite
+                         :keep true
+                         :debug true))))
+
+(deftask sweet
+  "repl development."
+  []
+  (let [pg 'miraj.demos.hello-world.miraj.sweet]
+    (comp (miraj/compile :pages #{pg}
+                         :polyfill :lite
+                         :keep true
+                         :debug true)
+          (miraj/link    :pages #{pg}
+                         ;; :assets :polymer
+                         :debug true))))
+
+(deftask sweeter
+  ""
+  []
+  (let [pg 'miraj.demos.hello-world.miraj.sweeter]
+    (comp (miraj/compile :pages #{pg}
+                         :polyfill :lite
+                         :keep true
+                         :debug true)
+          (miraj/link    :pages #{pg}
+                         ;; :assets :polymer
                          :debug true)
           (monitor)
           (miraj/compile :pages #{pg}
@@ -93,16 +100,16 @@
                          :debug true)
           (target))))
 
-(deftask sweeter
+(deftask sweetest
   ""
   []
-  (let [pg 'miraj.demos.hello-world.sweeter]
+  (let [pg 'miraj.demos.hello-world.miraj.sweetest]
     (comp (miraj/compile :pages #{pg}
                          :polyfill :lite
                          :keep true
                          :debug true)
           (miraj/link    :pages #{pg}
-                         :assets :polymer
+                         ;; :assets :polymer
                          :debug true)
           (monitor)
           (miraj/compile :pages #{pg}
