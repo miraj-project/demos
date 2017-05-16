@@ -1,11 +1,11 @@
-(ns miraj.demos.hello-world.miraj.sweeter.core)
+(ns miraj.demos.hello-world.miraj.sweetest.core)
 
 (enable-console-print!)
 
-(println "Hello world from miraj.demos.hello-world.sweeter.core!")
+(println "Hello world from miraj.demos.hello-world.sweetest.core!")
 
-(let [btn (.getElementById js/document "sweeterbtn")]
+(let [btn (.getElementById js/document "sweetestbtn")]
   (.addEventListener btn "click"
                      (fn [_] (enable-console-print!)
-                       (js/alert "Hello, Sweeter Miraj World!")
-                       (println "That tickles, sweeter"))))
+                       (js/alert "Hello, Sweetest Miraj World!")
+                       (println "That tickles, sweetest"))))

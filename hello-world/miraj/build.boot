@@ -48,7 +48,8 @@
   []
   (comp (serve :dir "target")
         (cider)
-        (repl :server true)
+        ;; (repl :server true)
+        (cljs-repl)  ;; run (start-repl) to get the cljs repl
         (watch)
         (notify :audible true)))
 
@@ -90,28 +91,29 @@
                          :debug true)
           (miraj/link    :pages #{pg}
                          ;; :assets :polymer
-                         :debug true)
-          (monitor)
-          (miraj/compile :pages #{pg}
-                         :polyfill :lite
-                         :keep true
-                         :debug true)
-          (miraj/link    :pages #{pg}
-                         :debug true)
-          (target))))
+                         :debug true))))
+          ;; (monitor)
+          ;; (miraj/compile :pages #{pg}
+          ;;                :polyfill :lite
+          ;;                :keep true
+          ;;                :debug true)
+          ;; (miraj/link    :pages #{pg}
+          ;;                :debug true)
+          ;; (target))))
 
 (deftask sweetest
   ""
   []
   (let [pg 'miraj.demos.hello-world.miraj.sweetest]
-    (comp (miraj/compile :pages #{pg}
-                         :polyfill :lite
-                         :keep true
-                         :debug true)
-          (miraj/link    :pages #{pg}
-                         ;; :assets :polymer
-                         :debug true)
-          (monitor)
+    ;; (comp (miraj/compile :pages #{pg}
+    ;;                      :polyfill :lite
+    ;;                      :keep true
+    ;;                      :debug true)
+    ;;       (miraj/link    :pages #{pg}
+    ;;                      ;; :assets :polymer
+    ;;                      :debug true)
+    ;;       (monitor)
+    (comp
           (miraj/compile :pages #{pg}
                          :polyfill :lite
                          :keep true
@@ -119,25 +121,20 @@
           (miraj/link    :pages #{pg}
                          :debug true)
           (reload) ;; live reload browser assets
-          (cljs-repl)  ;; run (start-repl) to get the cljs repl
-          (cljs :source-map true :optimizations :none) ;; always run this AFTER cljs-repl
-          (target))))
+          (cljs :source-map true :optimizations :none)))) ;; always run this AFTER cljs-repl
 
 (deftask pages
   ""
   []
-  (comp (monitor)
-        (miraj/compile :pages #{}
+  (comp (miraj/compile :pages #{}
                        :polyfill :lite
                        :keep true
                        :debug true)
         (miraj/link    :pages #{}
                        :debug true)
         (reload)
-        (cljs-repl)
         (cljs :source-map true
-              :optimizations :none)
-        (target)))
+              :optimizations :none)))
 
 
 

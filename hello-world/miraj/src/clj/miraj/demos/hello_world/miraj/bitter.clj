@@ -37,9 +37,9 @@
    ;; {:href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"}
    )
 
-  (:imports ["/imports/bitter.html"])
-
   (:js  ["/js/bitter.js"])
+
+  (:imports ["/imports/bitter.html"])
 
   ;; html metadata
   {::h/title"Miraj Demo: bitter hello-world"

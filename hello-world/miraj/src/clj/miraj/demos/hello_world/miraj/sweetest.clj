@@ -1,15 +1,15 @@
-(ns miraj.demos.hello-world.miraj.sweeter
+(ns miraj.demos.hello-world.miraj.sweetest
   (:require [miraj.core :as miraj]
             [miraj.html :as h :refer :all :exclude [meta]]
             [miraj.co-dom :as codom :refer [pprint serialize]]))
 
 (miraj/defpage
-  "Hello World - Miraj (sweeter) Demo Page"
+  "Hello, Sweetest Miraj World"
 
    ;; Alas, HTML import won't work for imported cljs, so we must be explicit:
-   (:js ["sweeter.js"})))
+   (:js ["sweetest.js"])
 
-  {::h/title "Hello, Sweeter Miraj"
+  {::h/title "Hello, Sweetest Miraj World"
    ::h/description "This page demonstrates of a simple miraj webpage."
    ::h/charset "utf-8"
    ::h/viewport {::h/width :device-width
@@ -22,9 +22,9 @@
               {::h/href "mac.icns" ::h/sizes #{[128 128] [512 512] [8192 8192] [32768 32768]}}]}
 
   (:body
-   (h1 "Hello Sweeter Miraj World!")
-   (h2 :#h {:miraj.style/hover {:background-color "#A5D6A7"}} "(sweeter)")
+   (h1 "Hello Sweetest Miraj World!")
+   (h2 :#h {:miraj.style/hover {:background-color "#A5D6A7"}} "(sweetest)")
    (div :#main
         (span :!centered
-              (button :#sweeterbtn "click me")))))
+              (button :#sweetestbtn "click me")))))
 
