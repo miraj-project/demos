@@ -3,7 +3,7 @@
             [miraj.html :as h :refer :all :exclude [meta]]
             [miraj.co-dom :as codom :refer [pprint serialize]]
             :reload))
- 
+
 (miraj/defpage
   "Hello, Sweet Miraj World"
 
