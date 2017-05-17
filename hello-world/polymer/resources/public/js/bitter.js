@@ -1,8 +1,7 @@
-// miraj.js
+// bitter.js
 
-// alert("loading miraj.js")
 
 handle_click = function(msg) {
     console.log("hey, " + msg + ", you clicked me!");
-    alert("Hello World (from " + msg + ")!");
+    alert("Hello, Bitter Polymer World (from " + msg + ")!");
 }

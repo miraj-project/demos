@@ -5,11 +5,11 @@
             [miraj.polymer.paper :as paper :refer [button]]
             :reload))
 
-;; like bitter, but we use defpage, so the <head> stuff is taken care
-;; of automatically
-(defpage index
+;; like bitter, but we use defpage (but not deps.edn)
+(defpage index ;; => miraj/demos/hello-world/polymer/sweet/index.html
   "demo"
   (require [miraj.polymer.paper :as paper :refer [card]])
+  (:css ["/css/sweet.css"])
 
   {::h/title"Miraj demo: hello-world"
    ::h/description "This page demonstrates of a simple miraj webpage."
@@ -21,8 +21,7 @@
                  ::h/user-scalable true}}
 
   (:body
-   (h1 "Hello World!")
-   (h2 "(from miraj.polymer.paper, sweet)")
+   (h1 "Hello, Sweet Polymer World!")
    (div :#cards
         (paper/card {:heading "Hello, you ol' Card!"}
                     (div :.card-content "Some content")
@@ -31,7 +30,7 @@
                                        "Some action"))))
    (script {:src "/js/custom-elements.min.js"
             :type "text/javascript"})
-   (script {:src "/js/miraj.js"
+   (script {:src "/js/sweet.js"
             :type "text/javascript"})))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

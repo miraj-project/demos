@@ -14,31 +14,27 @@
     (script {:src "/bower_components/webcomponentsjs/webcomponents-lite.min.js"})
     (link {:rel "import" :href "/bower_components/polymer/polymer.html"})
     (link {:rel "import" :href "/bower_components/paper-button/paper-button.html"})
-    (link {:rel "import" :href "/bower_components/paper-card/paper-card.html"}))
+    (link {:rel "import" :href "/bower_components/paper-card/paper-card.html"})
+    (link {:rel "stylesheet" :href "/css/bitter.css"}))
 
    (body
-    (h1 "Hello World!")
-    (h2 "(from miraj.polymer.paper, bitter)")
+    (h1 "Hello, Bitter Polymer World!")
     (div {:id "cards"}
-         (paper/card {:heading "Hello, you ol' Card!"}
+         (paper/card {:heading "Hello, you ol' Card!"
+                      :miraj.style/margin "12px"}
                      (div {:class "card-content"} "Some content")
                      (div {:class "card-actions"}
                           (paper/button {:raised nil
                                          :onclick "handle_click('bitter paper');"}
                                         "Some action"))))
     (script {:src "/js/custom-elements.min.js"})
-    (script {:src "/js/miraj.js"}))))
+    (script {:src "/js/bitter.js"}))))
 
-;; (-> index clojure.core/meta)
-
+;; in a repl:
 ;; (serialize index)
 ;; (pprint index)
 
-(-> *ns* clojure.core/meta)
-
 ;; this page is not compilable since it does not use defpage; we must do it by hand:
-#_(let [filename "target/miraj/demos/hello_world/polymer/bitter/index.html"]
+(let [filename "target/miraj/demos/hello_world/polymer/bitter/index.html"]
   (io/make-parents filename)
   (spit filename (with-out-str (-> index pprint print))))
-
-

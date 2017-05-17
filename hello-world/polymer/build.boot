@@ -28,6 +28,15 @@
        :description "miraj/defweb-page example code"
        :license     {"EPL" "http://www.eclipse.org/legal/epl-v10.html"}})
 
+(deftask monitor
+  "repl development."
+  []
+  (comp (cider)
+        (repl :server true :port 8080)
+        (serve :dir "target" :port 3000)
+        (watch)
+        (notify :audible true)))
+
 (deftask build
   "build"
   []
@@ -43,6 +52,44 @@
                     :debug true)
      #_(miraj/link    :pages #{} ;; all pages
                     ;; :assets :polymer
+                    :debug true))))
+
+(deftask bitter
+  "build bitter polymer demo"
+  []
+  (require '[miraj.demos.hello-world.polymer.bitter]))
+
+(deftask sweet
+  "build sweet polymer demo"
+  []
+  (let [pg 'miraj.demos.hello-world.polymer.sweet/index]
+    (comp
+     (miraj/compile :pages #{pg}
+                    :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{pg}
+                    :debug true))))
+
+(deftask sweeter
+  "build sweeter polymer demo"
+  []
+  (let [pg 'miraj.demos.hello-world.polymer.sweeter]
+    (comp
+     (miraj/compile :pages #{pg}
+                    :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{pg}
+                    :debug true))))
+
+(deftask sweetest
+  "build sweetest polymer demo"
+  []
+  (let [pg 'miraj.demos.hello-world.polymer.sweetest]
+    (comp
+     (miraj/compile :pages #{pg}
+                    :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{pg}
                     :debug true))))
 
 (deftask dev
