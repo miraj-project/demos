@@ -1,13 +1,13 @@
 (ns miraj.demos.hello-world.html.sweet
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.co-dom :as codom :refer [pprint serialize]]
             [miraj.html :as h :refer :all]
             [miraj.style :as s]
             [miraj.core :as miraj :refer [mcc defpage normalize optimize]]
-            [clojure.java.io :as io]
-            :reload))
-
-;; this will produce <ns>.html, i.e. miraj/demos/hello_world/html/sweet.html
-(defpage
+            [clojure.java.io :as io]))
+ 
+;; this will produce <ns>/index.html, i.e. miraj/demos/hello_world/html/sweet/index.html
+(defpage index
   "sweet html demo"
 
   #::h{:title "Hello, Sweet HTML world!"
@@ -70,4 +70,4 @@
 ;;              :polyfill :lite
 ;;              :debug true))
 
-(println "loaded sweet")
+;; (println "loaded sweet")

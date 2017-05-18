@@ -1,8 +1,8 @@
 (ns miraj.demos.hello-world.html.bitter
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.co-dom :refer [pprint serialize]]
             [miraj.html :refer :all]
-            [clojure.java.io :as io]
-            :reload))
+            [clojure.java.io :as io]))
 
 ;; bitter: use miraj.html functions, plus special attribute keywords
 

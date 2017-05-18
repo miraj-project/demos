@@ -1,7 +1,7 @@
 (ns miraj.demos.hello-world.html.bitterest
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.co-dom :refer [element pprint serialize]]
-            [clojure.java.io :as io]
-            :reload))
+            [clojure.java.io :as io]))
 
 ;; bitterest: use only co-dom primitives, no sugar
 

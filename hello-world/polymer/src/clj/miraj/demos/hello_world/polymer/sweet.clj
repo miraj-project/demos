@@ -1,4 +1,5 @@
 (ns miraj.demos.hello-world.polymer.sweet
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.core :as miraj :refer [compile-page-nss defpage normalize]]
             [miraj.html :as h :refer :all :exclude [button meta]]
             [miraj.co-dom :as codom :refer [pprint serialize]]

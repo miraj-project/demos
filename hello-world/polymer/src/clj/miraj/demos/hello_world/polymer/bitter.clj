@@ -1,10 +1,10 @@
 (ns miraj.demos.hello-world.polymer.bitter
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.core :as miraj :refer [normalize]]
             [miraj.html :refer :all :exclude [button]]
             [miraj.polymer.paper :as paper :refer [button]]
             [miraj.co-dom :as codom :refer [pprint serialize]]
-            [clojure.java.io :as io]
-            :reload))
+            [clojure.java.io :as io]))
 
 ;; we can use polymer components with plain html, no miraj sweetness
 ;; we have to spell everything out explicitly:

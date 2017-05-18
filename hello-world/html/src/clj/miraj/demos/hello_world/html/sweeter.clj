@@ -1,12 +1,10 @@
 (ns miraj.demos.hello-world.html.sweeter
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.co-dom :as codom :refer [pprint serialize]]
             [miraj.html :as h :refer :all]
             [miraj.style :as s]
             [miraj.core :as miraj :refer [mcc defpage normalize optimize]]
-            [clojure.java.io :as io]
-            :reload))
-
-(println "loading sweeter")
+            [clojure.java.io :as io]))
 
 ;; this will produce <ns>.html, i.e. miraj/demos/hello_world/html/sweeter.html
 (defpage
@@ -69,5 +67,3 @@
 ;;   (miraj/mcc :page *ns* ;; on the cli, use the ns sym: 'miraj.demos.hello-world.html.sweeter
 ;;              :polyfill :lite
 ;;              :debug true))
-
-(println "loaded sweeter")

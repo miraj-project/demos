@@ -5,9 +5,9 @@
  :asset-paths #{"resources/public"}
  :source-paths   #{"src/clj"}
 
- :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
-              [miraj/core "0.1.0-SNAPSHOT"]
-              [miraj/html "5.1.0-SNAPSHOT"]]
+ ;; :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
+ ;;              [miraj/core "0.1.0-SNAPSHOT"]
+ ;;              [miraj/html "5.1.0-SNAPSHOT"]]
 
  :dependencies   '[[org.clojure/clojure "RELEASE"]
                    [org.clojure/clojurescript "RELEASE"]
@@ -63,10 +63,6 @@
                          :debug true)
           (miraj/link    :pages #{pg}
                          ;; :assets :polymer
-                         :debug true)
-          (miraj/compile :pages #{pg}
-                         :polyfill :lite
-                         :keep true
                          :debug true))))
 
 (deftask sweet
@@ -92,27 +88,11 @@
           (miraj/link    :pages #{pg}
                          ;; :assets :polymer
                          :debug true))))
-          ;; (monitor)
-          ;; (miraj/compile :pages #{pg}
-          ;;                :polyfill :lite
-          ;;                :keep true
-          ;;                :debug true)
-          ;; (miraj/link    :pages #{pg}
-          ;;                :debug true)
-          ;; (target))))
 
 (deftask sweetest
   ""
   []
   (let [pg 'miraj.demos.hello-world.miraj.sweetest]
-    ;; (comp (miraj/compile :pages #{pg}
-    ;;                      :polyfill :lite
-    ;;                      :keep true
-    ;;                      :debug true)
-    ;;       (miraj/link    :pages #{pg}
-    ;;                      ;; :assets :polymer
-    ;;                      :debug true)
-    ;;       (monitor)
     (comp
           (miraj/compile :pages #{pg}
                          :polyfill :lite
@@ -121,20 +101,17 @@
           (miraj/link    :pages #{pg}
                          :debug true)
           (reload) ;; live reload browser assets
-          (cljs :source-map true :optimizations :none)))) ;; always run this AFTER cljs-repl
+          (cljs :source-map true
+                ;; :optimizations :none
+                )))) ;; always run this AFTER cljs-repl
 
 (deftask pages
   ""
   []
-  (comp (miraj/compile :pages #{}
-                       :polyfill :lite
-                       :keep true
-                       :debug true)
-        (miraj/link    :pages #{}
-                       :debug true)
-        (reload)
-        (cljs :source-map true
-              :optimizations :none)))
+  (comp (bitter)
+        (sweet)
+        (sweeter)
+        (sweetest)))
 
 
 

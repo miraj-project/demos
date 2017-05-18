@@ -1,7 +1,7 @@
 (ns miraj.demos.hello-world.html.bitterer
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.co-dom :refer [element pprint serialize]]
-            [clojure.java.io :as io]
-            :reload))
+            [clojure.java.io :as io]))
 
 ;; bitterer: use only co-dom primitives, plus special attribute
 ;; keywords for id (:#foo), class (:.bar.baz), boolean

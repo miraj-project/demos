@@ -1,3 +1,3 @@
-;; sweetest/deps.edn
-{:css [css.sweetest]
- :js  [js.sweetest]}
+;; html/sweetest/deps.edn
+{:css [["/css/sweetest.css"]]
+ :js  ["/js/sweetest.js"]}

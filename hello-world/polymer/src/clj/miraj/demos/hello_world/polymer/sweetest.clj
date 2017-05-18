@@ -1,4 +1,5 @@
 (ns miraj.demos.hello-world.polymer.sweetest
+  (:refer-clojure :exclude [map meta time])
   (:require [miraj.core :as miraj :refer [compile-page-nss defpage normalize]]
             [miraj.html :refer :all :exclude [button]]
             [miraj.co-dom :as codom :refer [pprint serialize]]
@@ -6,33 +7,22 @@
             :reload))
 
 ;; sweetest: use sweetest/deps.edn
-
 (defpage
-  "sweetest polymer demo"
+  "Hello, Sweetest Polymer World demo"
   (:require [miraj.polymer.iron :as iron :refer [collapse icon demo-snippet]]
             [miraj.polymer.paper :as paper :refer [card]])
 
-  ;; these are lexical dependencies, but data, not functions?
-  ;; (ditto for images?)
-  ;; (:icons [[miraj.polymer.iron communication hardware iron social]
-  ;;          [miraj.polymer.iron.icons communication hardware iron social]
-  ;;          [miraj.vaadin vaadin]])
+   (:body
+   (h1 :.amber "Hello, Sweetest Polymer World!")
 
-  (:styles [[miraj.polymer.iron.icons communication hardware iron social]
-            [miraj.polymer.iron.styles demo flex-mixins]
-            [miraj.polymer.paper.styles color typography]])
-
-  (:body
-   (h1 :.amber "Hello World!")
-   (h2 "(from miraj.polymer.paper, sweetest)")
    (div :#cards.vertical-section-container.centered
         (paper/card {:heading "Hello, you ol' Card!"}
                     (div :.card-content
                          (iron/icon :.star {:icon "star"})
                          "Some content")
                     (div :.card-actions.centered
-                         (paper/button :#btn.centered!raised "Click me"))))))
-
+                         (paper/button :#sweetestbtn.centered!raised "Click me"))))))
+ 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #_(binding [miraj/*debug* true
           miraj/*verbose* true

@@ -34,39 +34,63 @@
        :license     {"EPL" "http://www.eclipse.org/legal/epl-v10.html"}}
  repl {:port 8080})
 
-(deftask build
+(deftask monitor
+  "repl development."
+  []
+  (comp (serve :dir "target" :port 3000)
+        (cider)
+        (repl :server true :port 8080)
+        (watch)
+        (notify :audible true)))
+
+(deftask bitter
   "build"
   []
-  (let [pg 'miraj.demos.hello-world.html.sweeter]
-    ;; compilation is only for defpage, which these three do not use:
-    (require '[miraj.demos.hello-world.html.bitter]
+  (require '[miraj.demos.hello-world.html.bitter]
              '[miraj.demos.hello-world.html.bitterer]
              '[miraj.demos.hello-world.html.bitterest]
              ;; NB: spec.alpha breaks :relaod-all at the moment
-             ;;:reload-all ;; macros involved, reload is required for interactive dev
-             )
+             :reload ;; macros involved, reload is required for interactive dev
+             ))
+
+(deftask sweet
+  "build sweet html demo"
+  []
+  (let [pg 'miraj.demos.hello-world.html.sweet/index]
     (comp
-     ;; (miraj/compile :pages #{pg}
-     ;;                ;; :polyfill :lite
-     ;;                :debug true)
-     ;; (miraj/link    :pages #{pg}
-     ;;                ;; :assets :polymer  ;; copy assets from jar to resources dir
-     ;;                :debug true)
-     (miraj/compile :pages #{} ;; compile all pages in all nss
+     (miraj/compile :pages #{pg}
                     :polyfill :lite
                     :debug true)
-     (miraj/link    :pages #{} ;; link all pages
-                    ;; :assets :polymer  ;; copy assets from jar to resources dir
-                    :debug true)
-     (target :no-clean true))))
+     (miraj/link    :pages #{pg}
+                    :debug true))))
 
-(deftask dev
-  "repl development."
+(deftask sweeter
+  "build sweeter html demo"
   []
-  (comp (cider)
-        (repl :server true :port 8080)
-        (serve :dir "target" :port 3000)
-        (watch)
-        (notify :audible true)
-        (build)))
+  (let [pg 'miraj.demos.hello-world.html.sweeter]
+    (comp
+     (miraj/compile :pages #{pg}
+                    :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{pg}
+                    :debug true))))
+
+(deftask sweetest
+  "build sweetest html demo"
+  []
+  (let [pg 'miraj.demos.hello-world.html.sweetest]
+    (comp
+     (miraj/compile :pages #{pg}
+                    :polyfill :lite
+                    :debug true)
+     (miraj/link    :pages #{pg}
+                    :debug true))))
+
+(deftask pages
+  "compile and link all pages"
+  []
+  (comp #_(bitter)
+        (sweet)
+        (sweeter)
+        (sweetest)))
 
