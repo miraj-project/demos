@@ -5,8 +5,8 @@
  :resource-paths #{"resources/public"}
  :source-paths   #{"src/clj"}
 
- :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
-              [miraj/core "0.1.0-SNAPSHOT"]]
+ ;; :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
+ ;;              [miraj/core "0.1.0-SNAPSHOT"]]
 
  :dependencies   '[[org.clojure/clojure "RELEASE"]
                    [org.clojure/clojurescript "RELEASE"]
