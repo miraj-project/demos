@@ -24,6 +24,6 @@
    (h1 "Hello Sweeter Miraj World!")
    (h2 :#h {:miraj.style/hover {:background-color "#A5D6A7"}} "(sweeter)")
    (div :#main
-        (span :!centered
+        (span :?centered
               (button :#sweeterbtn "click me")))))
 
