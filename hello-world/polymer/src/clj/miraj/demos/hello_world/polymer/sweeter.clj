@@ -19,7 +19,7 @@
         (paper/card {:heading "Hello, you ol' Card!"}
                     (div :.card-content "Some content")
                     (div :.card-actions
-                         (paper/button :!raised {:onclick "handle_click('sweeter paper');"}
+                         (paper/button :?raised {:onclick "handle_click('sweeter paper');"}
                                        "Some action"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

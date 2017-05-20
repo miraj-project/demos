@@ -21,7 +21,7 @@
                          (iron/icon :.star {:icon "star"})
                          "Some content")
                     (div :.card-actions.centered
-                         (paper/button :#sweetestbtn.centered!raised "Click me"))))))
+                         (paper/button :#sweetestbtn.centered?raised "Click me"))))))
  
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #_(binding [miraj/*debug* true

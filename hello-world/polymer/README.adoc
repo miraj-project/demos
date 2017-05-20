@@ -1,4 +1,19 @@
-= Hello World (miraj)
+= Hello World (polymer)
 
-Miraj Hello World using miraj.miraj
+Miraj Hello World using polymer components.
 
+[source,shell]
+----
+$ boot monitor pages target
+----
+
+This will compile, link, and write all examples except bitter.clj,
+which does not use `defpage`.  To write it, load it in a repl, so the
+code at the bottom of the page will spit the HTML.
+
+You can also work with one page at a time; see `build.boot`.  Example:
+
+[source,shell]
+----
+$ boot monitor sweeter target
+----
