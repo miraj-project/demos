@@ -2,3 +2,24 @@
 
 Miraj demo pages.
 
+The demos are designed to be read in the following order:
+
+1. html
+2. miraj
+3. polymer
+4. components
+
+To build:
+
+[source,shell]
+----
+$ boot monitor <page> target
+----
+
+where <page> is one of the tasks in `build.boot` - e.g. bitter, sweet,
+sweeter, sweetest; or pages for all.
+
+This will build all the pages defined using `defcomponent`; the others
+must be serialized "manually".  The code in those includes the
+necessary instructions.  In general: run the above monitor-page-target
+pipeline, connect to the repl, and load the file (e.g. html/bitter.clj).
