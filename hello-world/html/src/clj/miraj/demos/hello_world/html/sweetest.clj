@@ -16,7 +16,7 @@
        :description "A page demonstrating miraj html programming"}
 
   (:body
-   (h/h1 :!centered
+   (h/h1 :?centered
          (h/span :.greeting "Hello,")
          (h/span :#foo1 {::s/color "blue"
                          ::s/before {:content "foo"}
@@ -24,10 +24,10 @@
                          ::s/hover {:color "green!important"
                                     :background-color "red"}}
                  " Sweetest HMTL ")
-         (h/span " World!"))
+         (h/span {::s/color "green"} " World!"))
 
-   (h/div :#main!centered
-          (h/span :!centered
+   (h/div :#main?centered
+          (h/span :?centered
                   (h/button :#btn.foo "click me")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

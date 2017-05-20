@@ -12,12 +12,12 @@
               (title "Hello, Bitter HTML World")
               (link {:rel "stylesheet" :href "/css/bitter.css"}))
         (body
-         (h1 :!centered
+         (h1 :?centered
              (span :.greeting "Hello,")
              (span {:miraj.style/color "green"} " Bitter HTML")
              (span " World!"))
-         (div :#main!centered
-              (span :!centered
+         (div :#main?centered
+              (span :?centered
                     (button :.foo
                             {:onclick "handle_click('bitter')"}
                             "click me")))

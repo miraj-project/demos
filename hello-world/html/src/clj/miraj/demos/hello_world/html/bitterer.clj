@@ -5,7 +5,7 @@
 
 ;; bitterer: use only co-dom primitives, plus special attribute
 ;; keywords for id (:#foo), class (:.bar.baz), boolean
-;; attributes (:!centered), and styles (e.g. :miraj.style/color)
+;; attributes (:?centered), and styles (e.g. :miraj.style/color)
 
 (def index
   (element :html {}
@@ -13,14 +13,14 @@
                     (element :title "Hello, Bitterer HTML World")
                     (element :link {:rel "stylesheet" :href "/css/bitterer.css"}))
            (element :body
-                    (element :h1 :!centered
+                    (element :h1 :?centered
                              (element :span :.greeting
                                       "Hello,")
                              (element :span {:miraj.style/color "green"}
                                       " Bitterer HTML")
                              (element :span " World!"))
-                    (element :div :#main!centered
-                             (element :span :!centered
+                    (element :div :#main?centered
+                             (element :span :?centered
                                       (element :button :.foo
                                                {:onclick "handle_click('bitterer')"}
                                                "click me")))

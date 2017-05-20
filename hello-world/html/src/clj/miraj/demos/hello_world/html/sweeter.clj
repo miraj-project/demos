@@ -14,12 +14,12 @@
   #::h{:title "Hello, Sweeter HTML World!"
        :description "A page demonstrating miraj html programming"}
 
-  ;; externel deps - see miraj demos for more syntax
+  ;; embedded refs to externel deps - see miraj demos for more syntax
   (:css ["/css/sweeter.css"])
   (:js ["/js/sweeter.js"])
 
   (:body
-   (miraj.html/h1 :!centered
+   (miraj.html/h1 :?centered
          (h/span :.greeting "Hello,")
          (h/span :#foo1 {::s/color "blue"
                          ::s/before {:content "foo"}
@@ -27,10 +27,10 @@
                          ::s/hover {:color "green!important"
                                     :background-color "red"}}
                  " Sweeter HMTL ")
-         (h/span "World!"))
+         (h/span {::s/color "green"} "World!"))
 
-   (h/div :#main!centered
-          (h/span :!centered
+   (h/div :#main?centered
+          (h/span :?centered
                   (h/button :#btn.foo
                             {:onclick "handle_click('sweeter')"}
                             "click me")))))

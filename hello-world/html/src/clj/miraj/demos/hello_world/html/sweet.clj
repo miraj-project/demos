@@ -5,7 +5,7 @@
             [miraj.style :as s]
             [miraj.core :as miraj :refer [mcc defpage normalize optimize]]
             [clojure.java.io :as io]))
- 
+
 ;; this will produce <ns>/index.html, i.e. miraj/demos/hello_world/html/sweet/index.html
 (defpage index
   "sweet html demo"
@@ -26,13 +26,13 @@
 }")
 
   (:body
-   (h/h1 :!centered
+   (h/h1 :?centered
          (h/span :.greeting "Hello,")
-         (h/span {::s/color "blue"} " Sweet HTML ")
+         (h/span {::s/color "green"} " Sweet HTML ")
          (h/span " World!"))
 
-   (h/div :#main!centered
-          (h/span :!centered
+   (h/div :#main?centered
+          (h/span :?centered
                   (h/button :.foo
                             {:onclick "handle_click('sweet')"}
                             "click me")))))
