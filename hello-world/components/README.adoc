@@ -1,0 +1,218 @@
+= miraj.demo.papyrus component lib
+
+This project shows how to build a library of custom webcomponents using Miraj.
+
+== namespaces
+
+There are several kinds of namespaces:
+
+* a component definition namespace contains defcomponent definitions
+
+* a component implementation namespace is where generated html and
+  cljs files go
+
+* a component library namespace is a Clojure namespace that aggregates
+  components defined in one or more implemenation namespaces.
+
+This allows us to put large numbers of components into a library
+without crowding the implementation namespace.  If we were to use the
+library namespace - in this example, miraj.demos.papyrus - as the
+implementation namespace, then we would have to shoehorn all of our
+defcomponent code into `miraj/demos/papyrus.clj`.  By separating
+implementation namespaces from library namespace, we can distribute
+our defcomponent code across however many implementation spaces we
+need.
+
+Implementation namespaces may again contain multiple instances of
+defcomponent, but for simplicity's sake we follow the convention of
+one defcomponent per implementation namespace.  We name the
+implementation after the HTML tag of the component; for example, we
+put `defcomponent hello-world :using hello` in
+`miraj.demos.papyrus.hello_world.clj`.
+
+== building
+
+=== compile components
+
+Component compilation generates the html and cljs files that
+implement the webcomponent. For example, given
+
+[source,clojure]
+----
+(ns miraj.demo.papyrus.button
+(defcomponent button :html papyrus-button ...)
+----
+
+Then `$ boot miraj/compile --components` will yield:
+
+[source,shell]
+----
+miraj/demo/papyrus/button/papyrus-button.cljs
+miraj/demo/papyrus/button/papyrus-button.html
+----
+
+Here the definition namespace is `miraj.demo.papyrus.button`, and the
+implementation namespace is `miraj.demo.papyrus.button.papyrus-button`.
+
+=== link libraries
+
+Compiled components must be "linked" into a component library to be
+used. Libraries are defined using `deflibrary`. This names the library
+and lists the component definition namespaces assembled into the
+library.  For example:
+
+.miraj.demo.clj
+[source,clojure]
+----
+(ns miraj.demo ...)
+(miraj/deflibrary papyrus
+  "Miraj component library: miraj.demo.papyrus"
+  #:miraj{:require '[[miraj.demo.papyrus.button :export :all]
+                     [miraj.demo.papyrus.card :export :all]]
+          :defelements true})
+----
+
+IMPORTANT: The namespaces listed in the `:require` vector must be
+_definition_ namespaces (i.e. Clojure namespaces), not
+_implementation_ namespaces.
+
+Given the above, `$ boot miraj/link --libraries` will yield
+`miraj/demo/papyrus.clj`, which will contain one element function per
+component.
+
+
+=== compile and link pages
+
+To use a component in a page, `:require` the component library in the
+`defpage` definition, and compile and link the page.
+
+Compiling a page will produce the HTML file for the page.
+
+Linking a page will produce the files needed to "link" it to the
+components it uses:
+
+* an HTML file containing import links for the components HTML files
+  used by the page
+* a `*.cljs.edn` file whose `:require` directive lists the
+   Clojurescript namespaces of the components; this will drive the
+   following Clojurescript compile step
+
+For example:
+
+.test_page.clj
+[source,clojure]
+----
+(ns test-page
+  (:require [miraj.demo.papyrus :as papyrus :refer [button card]]
+ ...))
+...
+(miraj/defpage ^{:base "/"} index
+...
+----
+
+Compiling and linking this pagespace will result in the following output:
+
+.target/
+[source,clojure]
+----
+index.html
+test_page/
+     miraj-imports.html
+test_page.cljs.edn
+----
+
+`test_page/miraj-imports.html` will be imported by `index.html` (`<link rel="import" href="/test_page/miraj-imports.html">`); it will contain something like:
+
+[source,html]
+----
+<link rel="import" href="/miraj/demo/papyrus/button/papyrus_button.html">
+<link rel="import" href="/miraj/demo/papyrus/card/papyrus_card.html">
+----
+
+
+`test_page.cljs.edn` will be used by `boot-cljs` to compile the Clojurescript
+files of the components; it looks like this:
+
+[source,clojure]
+----
+{:require [miraj.demo.papyrus.button.papyrus-button
+           miraj.demo.papyrus.card.papyrus-card]
+ :compiler-options {:optimizations :none
+                    :asset-path "/test_page/js"
+                    :output-dir "test_page/js"
+                    :output-to "test_page/js/components.js"}}
+----
+
+
+To compile a test page for your library, put the page source in a path
+that is _not_ in the fileset, such as `src/test/clj`. If you put it in
+`:source-paths` or `:resource-paths`, the compile and link tasks will
+try to load it, and this will fail since the component lib it uses is
+not yet on the classpath. Then use boot's built-in `sift` task to add
+it to the fileset just before you complile your page:
+
+.build.boot
+[source,clojure]
+----
+(set-env!
+ :source-paths #{"src/components/clj"}
+...
+ (comp
+  ...
+   (miraj/compile :keep true :debug true :components true)
+   (miraj/link    :debug true :libraries true)
+   ;; now add test page to classpath:
+   (sift :add-source #{"src/test/clj"})
+   ;; compile the test page
+   (miraj/compile :pages true :debug true)
+   (miraj/link    :pages true :debug true)
+  ...
+----
+
+Run this task _after_ you run the compile and link tasks; e.g.
+
+[source,clojure]
+----
+
+----
+
+== testing
+
+Miraj automatically generates a minimal test page if you compile and
+link with the `--test` flag.  For more elaborate testing, just create
+a page in the repo.
+
+
+== component demos
+
+Miraj makes it easy to create demo pages for your components.  Just
+create a demo pages using defpage in your library.  If your library
+defines multiple components, you must ensure the pages are namespaces
+so as to avoid clashes. The recommended practice is to name your demo
+pages `index`, and your demo namepages after your component's
+fully-qualified name. For example, if your component is
+`miraj.demos.papyrus.hello_world/hello`, then your demo namespace
+should be `miraj.demos.papyrus.hell_world.hello`.
+
+[source,shell]
+----
+miraj/demos/papyrus/hello_world.clj  # contains defcomponent hello-world :using hello
+miraj/demos/papyrus/hello_world/hello.clj  # contains defpage index
+----
+
+For single-component demos, add metadata `:base "/"` to your defpage:
+
+[source,clojure]
+----
+defpage ^{:base "/"} index ...
+----
+
+This will put the generated `index.html` at the root rather than the
+namespace path.  This would obviously be a problem if you have
+multiple components, since each demo page must have a unique path.
+Compiling your library with the `--demo` flag will ignore the :base
+flag.
+
+Once you have a collection of components and their demo pages, you can
+use the `boot-miraj/demo-page` task to create a master demo page with
+links to the component demo pages.
