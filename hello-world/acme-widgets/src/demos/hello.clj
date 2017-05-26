@@ -1,7 +1,7 @@
 (ns hello
   (:require [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.demos.hello-world.widgets :as widgets :refer [simple simpler simplest]]
+            [acme.widgets :as acme :refer [simple simpler simplest]]
             ;; for testing only:
             [miraj.core :as wc]
             [miraj.co-dom :as x]
@@ -19,15 +19,15 @@
 
    (h/div
     (h/h2 "Here's a simple hello:")
-    (widgets/simple))
+    (acme/simple))
 
    (h/div
     (h/h2 "Here's simpler:")
-    (widgets/simpler))
+    (acme/simpler))
 
    (h/div
     (h/h2 "Here's simplest:")
-    (widgets/simplest))
+    (acme/simplest))
    ))
 
 (println "loaded hello demo page")

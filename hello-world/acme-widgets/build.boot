@@ -15,8 +15,9 @@
 
  :checkouts '[[miraj/core "0.1.0-SNAPSHOT"]
               [miraj/co-dom "1.0.0-SNAPSHOT"]
+              [miraj/polymer "1.0.0-SNAPSHOT"]
               ;; testing
-              [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
+              ;; [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
               ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
               [miraj/boot-miraj "0.1.0-SNAPSHOT"]]
 
@@ -24,31 +25,30 @@
                  [org.clojure/tools.namespace "0.2.11"]
                  [miraj/co-dom "1.0.0-SNAPSHOT"]
                  [miraj/core "0.1.0-SNAPSHOT"]
+                 [miraj/html "5.1.0-SNAPSHOT"]
+                 [miraj/polymer "1.0.0-SNAPSHOT"]
+                 [miraj.polymer/paper "1.2.3-SNAPSHOT"]
+                 [miraj.polymer/iron "1.2.3-SNAPSHOT"]
+                 ;; [miraj/dom "1.2.3-SNAPSHOT"]
+                 ;; [miraj/platinum "1.2.3-SNAPSHOT"]
+
+                 [miraj/boot-miraj "0.1.0-SNAPSHOT" :scope "test"]
 
                  ;; [boot/core "2.6.0" :scope "provided"]
 
                  [org.clojure/clojurescript "1.9.473"]
                  [hipo "0.5.2"]
-                 [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
+                 ;; [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
+                 [adzerk/boot-cljs "2.0.0" :scope "test"]
                  [adzerk/boot-cljs-repl   "0.3.3"] ;; latest release
+
                  [com.cemerick/piggieback "0.2.1"  :scope "test"]
                  [weasel                  "0.7.0"  :scope "test"]
                  [org.clojure/tools.nrepl "0.2.12" :scope "test"]
 
                  [adzerk/boot-reload "0.5.1" :scope "test"] ;; cljs
 
-                 ;;[adzerk/boot-cljs "1.7.228-2" :scope "test"]
-                 ;; [adzerk/boot-cljs-repl "0.3.0" :scope "test"]
-
                  ;; [me.raynes/conch "0.8.0"]
-
-                 [miraj/boot-miraj "0.1.0-SNAPSHOT" :scope "test"]
-                 [miraj/html "5.1.0-SNAPSHOT"]
-                 [miraj.polymer/protocols "1.0.0-SNAPSHOT"]
-                 [miraj.polymer/paper "1.2.3-SNAPSHOT"]
-                 [miraj.polymer/iron "1.2.3-SNAPSHOT"]
-                 ;; [miraj/dom "1.2.3-SNAPSHOT"]
-                 ;; [miraj/platinum "1.2.3-SNAPSHOT"]
 
                  [tmp.components/greeter "0.1.0-SNAPSHOT"]
 
@@ -92,7 +92,7 @@
         (notify :audible true)))
 
 (deftask bitterness []
-  (comp (miraj/compile :components #{ 'miraj.demos.hello-world.bitterness}
+  (comp (miraj/compile :components #{ 'acme.bitterness}
                        :verbose true
                        :pprint true
                        ;;:debug true
@@ -102,7 +102,7 @@
                     :pprint true)
         ;; :debug true)
         (miraj/compile :pages #{'bitterness}
-                       :source-paths #{"src/demo"}
+                       :source-paths #{"src/demos"}
                        ;; instead we could use (sift :add-source #{"src/test/clj"})
                        :polyfill :lite
                        :verbose true
@@ -111,7 +111,7 @@
         (cljs)))
 
 (deftask hello []
-  (comp (miraj/compile :components #{ 'miraj.demos.hello-world}
+  (comp (miraj/compile :components #{ 'acme}
                        :verbose true
                        :pprint true
                        ;;:debug true
@@ -121,7 +121,7 @@
                     :pprint true)
         ;; :debug true)
         (miraj/compile :pages #{'hello}
-                       :source-paths #{"src/demo"}
+                       :source-paths #{"src/demos"}
                        :polyfill :lite
                        :verbose true
                        :pprint true)
@@ -129,21 +129,21 @@
         (cljs)))
 
 (deftask sweetness []
-  (comp (miraj/compile :components #{'miraj.demos.hello-world.sweetness}
-                       :verbose true
-                       :pprint true
-                       ;;:debug true
+  (comp (miraj/compile :components #{'acme.sweetness/sweet 'acme.sweetness/sweeter}
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
                        )
-        (miraj/link :libraries #{}
-                    :verbose true
-                    :pprint true)
-        ;; :debug true)
+        (miraj/link :libraries #{'acme/widgets}
+                    ;; :verbose true
+                    ;; :pprint true)
+                    :debug true)
         (miraj/compile :pages #{'sweetness}
-                       :source-paths #{"src/demo"}
+                       :source-paths #{"src/demos"}
                        :polyfill :lite
-                       :verbose true
-                       :pprint true)
-        ;; :debug true)
+                       ;; :verbose true
+                       ;; :pprint true)
+                       :debug true)
         (cljs)))
 
 (deftask components []
@@ -161,51 +161,10 @@
      (miraj/link :libraries #{}
                  :debug true)
      (miraj/compile :pages #{'index}
-                    :source-paths #{"src/demo"}
+                    :source-paths #{"src/demos"}
                     :polyfill :lite
                     :debug true)
      (cljs))))
 
      #_(miraj/link    :pages #{pg}
                     :debug true)
-
-;; (deftask dev []
-;;   (comp
-;;    (watch)
-;;    (notify :audible true)
-;;    ;; (refresh)
-;;    (miraj/compile :components #{}) ;; :debug true); :test true)
-;;    (miraj/link    :debug true :libraries true) ;; :test true)
-;;    ;; now add test page to classpath:
-;;    (sift :add-source #{"src/test/clj"})
-;;    ;; compile the test page
-;;    (miraj/compile :pages true :debug true)
-;;    (miraj/link    :pages true :debug true)
-;;    (target)))
-
-#_(deftask page []
-    (let [foo (set-env! :source-paths #(conj % "src/test/clj"))]
-      (miraj/compile :pages true :debug true)))
-
-(deftask run
-  "compile, serve"
-  []
-  (comp
-   (serve :dir "target") ;; since bower_components is in :asset-paths, it's not on classpath
-   (watch) ;; :verbose true)
-   ;; (cljs-repl)
-   (notify :audible true)
-   ;;   (refresh)
-   (miraj/compile :keep true :debug true :components true); :test true)
-   (miraj/link    :debug true :libraries true) ;; :test true)
-   (target)
-   ;; now add test page to classpath:
-   (sift :add-source #{"src/test/clj"})
-   ;; compile the test page
-   (miraj/compile :pages true :debug true)
-   (miraj/link    :pages true :debug true) ;; FIXME: this logic goes in compile -p
-   ;;   (reload)
-   (target :no-clean true)
-   (cljs)
-   (target :no-clean true)
-   #_(wait)))

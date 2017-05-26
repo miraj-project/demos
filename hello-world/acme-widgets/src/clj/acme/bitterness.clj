@@ -1,4 +1,4 @@
-(ns miraj.demos.hello-world.bitterness
+(ns acme.bitterness
   (:require [clojure.java.io :as io]
             [clojure.pprint :as pp]
             [miraj.core :as miraj]

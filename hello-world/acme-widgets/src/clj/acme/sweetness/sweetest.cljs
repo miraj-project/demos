@@ -1,8 +1,8 @@
-(ns miraj.demos.hello-world.bitterness.bitterest)
+(ns acme.sweetness.sweetest)
 
 (enable-console-print!)
 
-(println "LOADING miraj.demos.hello-world.bitterness.bitterest")
+(println "LOADING acme.sweetness.sweetest")
 
 (defn created [] (println "CREATED"))
 
@@ -17,13 +17,13 @@
     (.appendChild root div)))
 
 (defn say
-  ([] "HELLO from bitterness-bitterest!")
-  ([old new] (println "OUT with the bitterness-bitterest old: " old "\nIn with the bitterness-bitterest new: " new)))
+  ([] "HELLO from Hello-Card!")
+  ([old new] (println "OUT with the sweetest old: " old "\nIn with the sweetest new: " new)))
 
-(defn observe-greeting [old new] (println "OBSERVING:" old new))
+(defn observe-greeting [old new] (println (str "OBSERVING sweetest: old: " old ", new:" new)))
 
 (defn complex-observer [greeting addressee]
-                   (.log js/console "Compound bitterness-bitterest observation: " greeting ", " addressee)
+                   (.log js/console "Compound sweetest observation: " greeting ", " addressee)
                    (this-as this (set! (.-foo this) (str greeting ", " addressee " ()"))))
 
 

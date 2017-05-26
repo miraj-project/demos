@@ -1,7 +1,7 @@
 (ns index
   (:require [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.demos.hello-world.widgets :as widgets :refer :all]
+            [acme.widgets :as acme :refer :all]
             ;; for testing only:
             [miraj.core :as wc]
             [miraj.co-dom :as x]
@@ -30,43 +30,43 @@
    (h/div
     (h/h2 "Here's a simple component:")
     (h/div {:miraj.style/border "thick black solid;"}
-           (widgets/simple)))
+           (acme/simple)))
 
    (h/div
     (h/h2 "Here's a simpler component:")
     (h/div {:miraj.style/border "thick black solid;"}
-           (widgets/simpler)))
+           (acme/simpler)))
 
    (h/div
     (h/h2 "Here's a simplest component:")
     (h/div {:miraj.style/border "thick black solid;"}
-           (widgets/simplest)))
+           (acme/simplest)))
 
    (h/div
     (h/h2 "Here's a bitter component:")
-    (widgets/bitter))
+    (acme/bitter))
 
    (h/div
     (h/h2 "Here's a bitterer component:")
     (h/div {:miraj.style/border "thick black solid;"}
-           (widgets/bitterer)))
+           (acme/bitterer)))
 
    (h/div
     (h/h2 "Here's a bitterest component:")
     (h/div {:miraj.style/border "thick black solid;"}
-           (widgets/bitterest)))
+           (acme/bitterest)))
 
    (h/div
     (h/h2 "Here's a sweet hello:")
-    (widgets/sweet))
+    (acme/sweet))
 
    (h/div
     (h/h2 "Here's sweeter:")
-    (widgets/sweeter))
+    (acme/sweeter))
 
    (h/div
     (h/h2 "Here's sweetest:")
-    (widgets/sweetest))
+    (acme/sweetest))
    ))
 
 (println "loaded index")

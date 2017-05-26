@@ -1,4 +1,4 @@
-(ns miraj.demos.hello-world
+(ns acme
   (:require [miraj.core :as miraj]
             [miraj.html :as h]
             [miraj.polymer.protocols :as poly]
@@ -6,9 +6,9 @@
             [miraj.polymer.paper :as paper]
              :reload))
 
-(println "loading miraj.demos.hello-world")
+(println "loading acme")
 
-;; in the lib, this will be exported as miraj.demos.hello-world.widgets/simple
+;; in the lib, this will be exported as acme.widgets/simple
 (miraj/defcomponent simple :html hello-simple
   "Hello component - simple"
   (:codom
@@ -26,13 +26,13 @@
   (:codom (h/span "I am a mere <span> - just about the simplest component you could make.")))
 
 (miraj/deflibrary widgets
-  "Miraj component library: miraj.demos.hello-world.widgets"
-  #:miraj{:require '[[miraj.demos.hello-world :export :all]
-                     [miraj.demos.hello-world.bitterness :export :all]
-                     [miraj.demos.hello-world.sweetness :export :all]]
+  "Miraj component library: acme.widgets"
+  #:miraj{:require '[;[acme :export :all]
+                     ;[acme.bitterness :export :all]
+                     [acme.sweetness :export :all]]
           :defelements true})
 
-(println "loaded miraj.demos.hello-world")
+(println "loaded acme")
 
 ;; for testing:
 

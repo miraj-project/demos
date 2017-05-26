@@ -1,7 +1,7 @@
 (ns sweetness
   (:require [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.demos.hello-world.widgets :as widgets :refer [sweet sweeter sweetest]]
+            [acme.widgets :as acme :refer [sweet sweeter]] ;; sweetest]]
             ;; for testing only:
             [miraj.core :as wc]
             [miraj.co-dom :as x]
@@ -19,15 +19,18 @@
 
    (h/div
     (h/h2 "Here's a sweet hello:")
-    (widgets/sweet))
+    ;; click the component to toggle this class:
+    (h/style ".foobar {border: thick red solid;}")
+    (acme/sweet {:greeting "Howdy"
+                 :miraj.style/text-align "center"} "world!"))
 
    (h/div
     (h/h2 "Here's sweeter:")
-    (widgets/sweeter))
+    (acme/sweeter "hello"))
 
-   (h/div
-    (h/h2 "Here's sweetest:")
-    (widgets/sweetest))
+   ;; (h/div
+   ;;  (h/h2 "Here's sweetest:")
+   ;;  (acme/sweetest))
    ))
 
 (println "loaded sweetness demo page")

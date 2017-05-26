@@ -1,15 +1,16 @@
-= miraj.demo.papyrus component lib
+= acme widgets demo
 
 This project shows how to build a library of custom webcomponents using Miraj.
 
 == namespaces
 
-There are several kinds of namespaces:
+It's useful to distinguish several kinds of namespaces:
 
-* a component definition namespace contains defcomponent definitions
+* a namespace containing defcomponent definitions is a _component space_
 
-* a component implementation namespace is where generated html and
-  cljs files go
+* a namespace containing defpage definitions is a _page space_
+
+* an implementation "pathspace" is where generated html and cljs files go
 
 * a component library namespace is a Clojure namespace that aggregates
   components defined in one or more implemenation namespaces.

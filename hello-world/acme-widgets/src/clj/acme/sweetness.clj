@@ -1,11 +1,12 @@
-(ns miraj.demos.hello-world.sweetness
+(ns acme.sweetness
   (:require [clojure.java.io :as io]
             [clojure.pprint :as pp]
             [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.polymer.protocols :as poly]
             [miraj.html.protocols :as hp]
-            [miraj.polymer.paper :as paper]
+            [miraj.polymer :as p :refer [slot]]
+            [miraj.polymer.protocols :as poly]
+            ;; [miraj.polymer.paper :as paper]
 
             ;; for testing only:
             [miraj.co-dom :as codom]
@@ -13,20 +14,87 @@
 
 (println "loading miraj.demos.hello-world.sweetness")
 
+
 ;; in the lib, this will be exported as miraj.demos.hello-world.widgets/sweet
 (miraj/defcomponent sweet :html sweetness-sweet
   "sweet"
-  (:codom
-   (h/span "Sweet")))
+  (:require [miraj.polymer.paper :as paper :refer [button card]]
+            [miraj.polymer.iron :as iron :refer [icon]])
 
+  (:codom
+     (paper/card {:heading "Sweet Card"}
+               (h/div :message)
+               (h/div (h/span "Click count: " :click-count))
+               (h/div (h/span "Mouseover count: " :mouseover-count))
+               (h/div
+                (h/span :greeting ", " :flavor)
+                (h/span
+                 (p/slot)
+                 ))))
+
+  ;; prototype map - this will generate the js prototype code for the component
+  {:polymer/properties {;; :greeting is a property, also set as a static attribute below
+                        :greeting ^String{:value "Hello"
+                                          :type String
+                                          :observer (fn [new old] (sweet/observe-greeting new old))}
+                        :flavor {:value "SWEET"
+                                 :type String}
+                        :message {:value (sweet/say)}
+                        :click-count {:value 0 :type Number
+                                      :observer (fn [new old]
+                                                  (sweet/observe-click-count new old))}
+                        :mouseover-count {:value 0 :type Number
+                                           :observer (fn [new old]
+                                                       (sweet/observe-mouseover-count new old))}
+                        }
+
+   ;; static html attributes on host (Polymer hostAttributes property)
+   ;; see https://www.polymer-project.org/1.0/docs/devguide/registering-elements#host-attributes
+   ;; these will cause html attrs to be set at create time
+   ;; inspect the rendered host element to see them
+   :polymer/static {:string-attr1 "attr1"
+                    :boolean-attr2 true
+                    :greeting "Hello"
+                    :tabindex 0}
+
+   ;; complex observers take (keyword) properties as params
+   ;; this will be fired whenever either property changes
+   ;; https://www.polymer-project.org/1.0/docs/devguide/observers#complex-observers
+   :greeting-flavor-observer (fn [:greeting :flavor]
+                               ;; pass the args as syms
+                               (sweet/greeting-flavor-observer greeting flavor))
+
+   ;; local properties - we can put them in the prototype, or in a cljs namespace
+   ;; for polymer binding, they must be in the prototype
+   :name {:last "Smith"
+          :first "John"}
+
+   ;; "instance" methods (https://www.polymer-project.org/1.0/docs/devguide/instance-methods)
+   ;; with javascript, instance methods go in the component's prototype
+   ;; with clojurescript, we don't need this - just use functions in the delegate namespace
+   }
+
+  miraj.html.protocols/Mouse
+  (click [e] (this-as this (sweet/click this e)))
+  (mouseover [e] (this-as this (sweet/mouseover this e)))
+)
+
+;; sweeter - we can embed css in two ways.
 (miraj/defcomponent sweeter :html sweetness-sweeter
   "sweeter"
+  (:require [miraj.polymer.paper :as paper :refer [button card]]
+            [miraj.polymer.iron :as iron :refer [icon]])
+  (:css "#foo {color: blue;}") ;; this will be moved into the <template> element
   (:codom
-   (h/span "Sweeter")))
+   (h/style "paper-card {text-align: center;}") ;; direct html coding works too, inside :codom
+   (paper/card {:heading "Sweeter Card"}
+    (h/span :#foo "Sweeter")
+    (h/span {:miraj.style/color "red"}
+     (p/slot)
+     ))))
 
-
-;; in the lib, this will be exported as miraj.demos.hello-world.widgets/bitter
-(miraj/defcomponent sweetest :html sweetness-sweetest
+;; sweetest - fun with bindings
+#_(miraj/defcomponent sweetest :html sweetness-sweetest
   "sweetest"
 
   ;;(:require [miraj.polymer.paper :as paper])
@@ -35,7 +103,7 @@
  span {background-color:#E0F2F1;}")
    (h/style ":host h1, :host h2 {text-align:center;}")
    (h/h1 "Sweetest!")
- 
+
    (h/div (h/h4 "Another Fine Sweetest Message!"))
    (h/div 'message) ;; 1-way binding, 'message => [[message]]
    (h/div :#special.page-title

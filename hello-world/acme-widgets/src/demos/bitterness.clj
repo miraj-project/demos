@@ -1,7 +1,7 @@
 (ns bitterness
   (:require [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.demos.hello-world.widgets :as widgets :refer [bitter bitterer bitterest]]
+            [acme.widgets :as acme :refer [bitter bitterer bitterest]]
             ;; for testing only:
             [miraj.core :as wc]
             [miraj.co-dom :as x]
@@ -19,15 +19,15 @@
 
    (h/div
     (h/h2 "Here's a bitter hello:")
-    (widgets/bitter))
+    (acme/bitter))
 
    (h/div
     (h/h2 "Here's bitterer:")
-    (widgets/bitterer))
+    (acme/bitterer))
 
    (h/div
     (h/h2 "Here's bitterest:")
-    (widgets/bitterest))
+    (acme/bitterest))
    ))
 
 (println "loaded bitterness demo page")
