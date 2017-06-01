@@ -1,132 +1,65 @@
-(ns acme.sweetness
+(ns acme.bitterness
   (:require [clojure.java.io :as io]
             [clojure.pprint :as pp]
             [miraj.core :as miraj]
             [miraj.html :as h]
-            [miraj.html.protocols :as hp]
             [miraj.polymer :as p :refer [slot]]
             [miraj.polymer.protocols :as poly]
-            ;; [miraj.polymer.paper :as paper]
+            [miraj.html.protocols :as hp]
+            [miraj.polymer.paper :as paper]
 
             ;; for testing only:
             [miraj.co-dom :as codom]
             #_:reload))
 
-(println "loading miraj.demos.hello-world.sweetness")
+;; (println "loading acme.bitterness")
 
-
-;; in the lib, this will be exported as miraj.demos.hello-world.widgets/sweet
-(miraj/defcomponent sweet :html sweetness-sweet
-  "sweet"
-  (:require [miraj.polymer.paper :as paper :refer [button card]]
-            [miraj.polymer.iron :as iron :refer [icon]])
-
+;; in the lib, this will be exported as acme.widgets/bitterest
+(miraj/defcomponent bitterest :html acme-bitterest
+  "bitter"
   (:codom
-     (paper/card {:heading "Sweet Card"}
-               (h/div :message)
-               (h/div (h/span "Click count: " :click-count))
-               (h/div (h/span "Mouseover count: " :mouseover-count))
-               (h/div
-                (h/span :greeting ", " :flavor)
-                (h/span
-                 (p/slot)
-                 ))))
+   (h/div
+    (h/h1 "Bitterest Component!"))))
 
-  ;; prototype map - this will generate the js prototype code for the component
-  {:polymer/properties {;; :greeting is a property, also set as a static attribute below
-                        :greeting ^String{:value "Hello"
-                                          :type String
-                                          :observer (fn [new old] (sweet/observe-greeting new old))}
-                        :flavor {:value "SWEET"
-                                 :type String}
-                        :message {:value (sweet/say)}
-                        :click-count {:value 0 :type Number
-                                      :observer (fn [new old]
-                                                  (sweet/observe-click-count new old))}
-                        :mouseover-count {:value 0 :type Number
-                                           :observer (fn [new old]
-                                                       (sweet/observe-mouseover-count new old))}
-                        }
+;; to be exported as acme.widgets/bitterer
+(miraj/defcomponent bitterer :html acme-bitterer
+  "bitterer"
+  (:codom (h/span "Bitterer")))
 
-   ;; static html attributes on host (Polymer hostAttributes property)
-   ;; see https://www.polymer-project.org/1.0/docs/devguide/registering-elements#host-attributes
-   ;; these will cause html attrs to be set at create time
-   ;; inspect the rendered host element to see them
-   :polymer/static {:string-attr1 "attr1"
-                    :boolean-attr2 true
-                    :greeting "Hello"
-                    :tabindex 0}
-
-   ;; complex observers take (keyword) properties as params
-   ;; this will be fired whenever either property changes
-   ;; https://www.polymer-project.org/1.0/docs/devguide/observers#complex-observers
-   :greeting-flavor-observer (fn [:greeting :flavor]
-                               ;; pass the args as syms
-                               (sweet/greeting-flavor-observer greeting flavor))
-
-   ;; local properties - we can put them in the prototype, or in a cljs namespace
-   ;; for polymer binding, they must be in the prototype
-   :name {:last "Smith"
-          :first "John"}
-
-   ;; "instance" methods (https://www.polymer-project.org/1.0/docs/devguide/instance-methods)
-   ;; with javascript, instance methods go in the component's prototype
-   ;; with clojurescript, we don't need this - just use functions in the delegate namespace
-   }
-
-  miraj.html.protocols/Mouse
-  (click [e] (this-as this (sweet/click this e)))
-  (mouseover [e] (this-as this (sweet/mouseover this e)))
-)
-
-;; sweeter - we can embed css in two ways.
-(miraj/defcomponent sweeter :html sweetness-sweeter
-  "sweeter"
-  (:require [miraj.polymer.paper :as paper :refer [button card]]
-            [miraj.polymer.iron :as iron :refer [icon]])
-  (:css "#foo {color: blue;}") ;; this will be moved into the <template> element
-  (:codom
-   (h/style "paper-card {text-align: center;}") ;; direct html coding works too, inside :codom
-   (paper/card {:heading "Sweeter Card"}
-    (h/span :#foo "Sweeter")
-    (h/span {:miraj.style/color "red"}
-     (p/slot)
-     ))))
-
-;; sweetest - fun with bindings
-#_(miraj/defcomponent sweetest :html sweetness-sweetest
-  "sweetest"
+;; to be exported as acme.widgets/bitter
+(miraj/defcomponent bitter :html acme-bitter
+  "Custom button component"
 
   ;;(:require [miraj.polymer.paper :as paper])
   (:codom
    (h/style ":host {display: block; width: 50%; border:thick blue solid;}
  span {background-color:#E0F2F1;}")
    (h/style ":host h1, :host h2 {text-align:center;}")
-   (h/h1 "Sweetest!")
+   (h/h1 "BITTER!")
 
-   (h/div (h/h4 "Another Fine Sweetest Message!"))
-   (h/div 'message) ;; 1-way binding, 'message => [[message]]
+   (h/div (h/h4 "Another Fine Bitter Message!"))
+   (h/div (p/bind! :message)) ;; 1-way binding [[message]]
    (h/div :#special.page-title
-          (h/span :greeting) ;; :greeting == {{greeting}}, 2-way binding
+          (h/span (p/bind!! :greeting)) ;; {{greeting}}, 2-way binding
           (h/span ", ")
-          (h/span :addressee))
+          (h/span (p/bind!! :addressee)))
    (h/span "UPDATE text to change the greeting.")
-   (h/input {:class "paper-font-body2" :value :input->greeting}) ;; input event sends value to greeting
-   (h/input {:class "paper-font-body2" :value :input->addressee}))
+   (h/input {:class "paper-font-body2" :value (p/bind!! :input->greeting)})
+   (h/input {:class "paper-font-body2" :value (p/bind!! :input->addressee)}))
 
   ;; polymer prototype
   {:polymer/properties {:greeting ^String{:value "hello"
                                           ;; :type String
                                           ;; FIXME: alias for helper ns
-                                          :observer (fn [new old] (del/observe-greeting new old))
-                                          ;;:observer (clj->js 'del/observe-greeting)
+                                          :observer (fn [new old] (bitter/observe-greeting new old))
+                                          ;;:observer (clj->js 'bitter/observe-greeting)
                                           }
-                        :addressee {:value "SWEETEST"
+                        :addressee {:value "BUTTON"
                                     ;; :type String
                                     :observer #(.log js/console (str "Addressee CHG OBSERVED " %))
                                     }
                         ;; :message {:value (fn [:greeting :addressee] (str greeting ", " addressee))}
-                        :message {:value (del/say)}
+                        :message {:value (bitter/say)}
 
                         :foo {:type String}
                         ;; :value "howdy there"} ;; (fn [] "msg")}
@@ -164,6 +97,7 @@
    ;; :polymer/observers [miraj.demo.basic.hello/complex-observer]
    ;; or use fn app syntax?
    ;;   :polymer/observers [(miraj.demo.basic.hello/complex-observer :greeting :addressee)]
+
 
    ;; local properties - we can put them in the prototype, or in a cljs namespace
    ;; for polymer binding, they must be in the prototype
@@ -210,10 +144,10 @@
   miraj.html.protocols/Mouse
   (click [e] (this-as this
                ;; (println "root: " (.-root this))
-               (del/click this e))) ;; [x] (.log js/console "Mouseclick"))
-  (mouseover [x] (del/mouseover x)) ; (.log js/console "MOUSEOVER"))
+               (bitter/click this e))) ;; [x] (.log js/console "Mouseclick"))
+  (mouseover [x] (bitter/mouseover x)) ; (.log js/console "MOUSEOVER"))
   )
 
                                         ;(-> hello var meta :miraj/miraj keys)
                                         ;(-> basic var meta)
-(println "loaded miraj.demos.hello-world.bitterness")
+;; (println "loaded acme.bitterness")

@@ -2,29 +2,26 @@
 (def +version+ "0.1.0-SNAPSHOT")
 
 (set-env!
- :source-paths #{"src/clj"}
- ;;:resource-paths #{"src/cljs"}
- ;; bower must be on classpath for http to pick it up
- ;; :resource-paths #{"resources/public"}
- :asset-paths #{"resources/public"}
+ :source-paths #{"src/clj/lib"}
+ :asset-paths #{"resources/public" "src/clj/app"}
 
  ;; :resource-paths #{"resources"}
  ;; :target-path "resources/public"
 
  ;; :repositories #(conj % ["clojars" {:url "https://clojars.org/repo/"}])
 
- :checkouts '[[miraj/core "0.1.0-SNAPSHOT"]
-              [miraj/co-dom "1.0.0-SNAPSHOT"]
+ :checkouts '[[miraj/core "1.0.0-SNAPSHOT"]
               [miraj/polymer "1.0.0-SNAPSHOT"]
               ;; testing
+              [miraj/co-dom "1.0.0-SNAPSHOT"] ;; test?
               ;; [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
               ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
               [miraj/boot-miraj "0.1.0-SNAPSHOT"]]
 
- :dependencies '[[org.clojure/clojure "1.9.0-alpha16"]
+ :dependencies '[[org.clojure/clojure "1.9.0-alpha17"]
                  [org.clojure/tools.namespace "0.2.11"]
                  [miraj/co-dom "1.0.0-SNAPSHOT"]
-                 [miraj/core "0.1.0-SNAPSHOT"]
+                 [miraj/core "1.0.0-SNAPSHOT"]
                  [miraj/html "5.1.0-SNAPSHOT"]
                  [miraj/polymer "1.0.0-SNAPSHOT"]
                  [miraj.polymer/paper "1.2.3-SNAPSHOT"]
@@ -68,7 +65,7 @@
          ;; '[boot.core :as boot]
          '[clojure.tools.namespace.repl :as tns]
          '[miraj.boot-miraj :as miraj]
-         '[boot.task.built-in]
+         '[boot.task.built-in :as boot]
          '[pandeiro.boot-http :refer :all]
          '[samestep.boot-refresh :refer [refresh]]
          '[adzerk.boot-reload :refer [reload]]
@@ -91,24 +88,33 @@
         (watch)
         (notify :audible true)))
 
+(deftask bitter []
+  (comp (miraj/compile :components #{ 'acme.bitterness/bitter}
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
+                       )))
+
+(deftask bitterer []
+  (comp (miraj/compile :components #{ 'acme.bitterness/bitterer}
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
+                       )))
+
+(deftask bitterest []
+  (comp (miraj/compile :components #{ 'acme.bitterness/bitterest}
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
+                       )))
+
 (deftask bitterness []
   (comp (miraj/compile :components #{ 'acme.bitterness}
-                       :verbose true
-                       :pprint true
-                       ;;:debug true
-                       )
-        (miraj/link :libraries #{}
-                    :verbose true
-                    :pprint true)
-        ;; :debug true)
-        (miraj/compile :pages #{'bitterness}
-                       :source-paths #{"src/demos"}
-                       ;; instead we could use (sift :add-source #{"src/test/clj"})
-                       :polyfill :lite
-                       :verbose true
-                       :pprint true)
-        ;; :debug true)
-        (cljs)))
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
+                       )))
 
 (deftask hello []
   (comp (miraj/compile :components #{ 'acme}
@@ -128,43 +134,94 @@
         ;; :debug true)
         (cljs)))
 
+(deftask sweet []
+  (comp (miraj/compile :components #{'acme.sweetness/sweet}
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
+                       )))
+
+(deftask sweeter []
+  (comp (miraj/compile :components #{'acme.sweetness/sweeter}
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
+                       )))
+
+(deftask sweetest []
+  (comp (miraj/compile :components #{'acme.sweetness/sweetest}
+                       ;; :verbose true
+                       ;; :pprint true
+                       :debug true
+                       )))
+
 (deftask sweetness []
   (comp (miraj/compile :components #{'acme.sweetness/sweet 'acme.sweetness/sweeter}
                        ;; :verbose true
                        ;; :pprint true
                        :debug true
-                       )
-        (miraj/link :libraries #{'acme/widgets}
-                    ;; :verbose true
-                    ;; :pprint true)
-                    :debug true)
-        (miraj/compile :pages #{'sweetness}
-                       :source-paths #{"src/demos"}
-                       :polyfill :lite
-                       ;; :verbose true
-                       ;; :pprint true)
-                       :debug true)
-        (cljs)))
+                       )))
+        ;; (miraj/link :libraries #{'acme/widgets}
+        ;;             ;; :verbose true
+        ;;             ;; :pprint true)
+        ;;             :debug true)
+        ;; (miraj/compile :pages #{'sweetness}
+        ;;                :source-paths #{"src/demos"}
+        ;;                :polyfill :lite
+        ;;                ;; :verbose true
+        ;;                ;; :pprint true)
+        ;;                :debug true)
+        ;; (cljs)))
 
-(deftask components []
-  (comp (miraj/compile :components #{}
-                       ;; :keep true
-                       ;; :pprint true
-                       :debug true)
-        (miraj/link    :libraries #{}
-                       :debug true)))
+(deftask lib []
+  (comp
+   (miraj/link :libraries #{'acme/widgets}
+               ;; :verbose true
+               ;; :pprint true)
+               :debug true)
+   (miraj/compile :components #{}
+                  ;; :keep true
+                  ;; :pprint true
+                  :debug true)
+   (cljs)))
 
 (deftask index []
   (let [pg 'index]
     (comp
-     (components)
-     (miraj/link :libraries #{}
-                 :debug true)
+     (lib)
      (miraj/compile :pages #{'index}
                     :source-paths #{"src/demos"}
                     :polyfill :lite
                     :debug true)
      (cljs))))
 
-     #_(miraj/link    :pages #{pg}
-                    :debug true)
+(deftask demo
+  [p page PAGE sym   "Demo page to compile."]
+  (println "PAGE: " page)
+  (comp
+   (miraj/link :libraries #{'acme/widgets}
+               ;; :verbose true
+               ;; :pprint true)
+               :debug true)
+   (cljs)
+   (miraj/compile :demo 'acme.widgets
+                  ;; :components #{} ;; all
+                  :components #{'acme.sweetness/sweetest} ;; just this one
+                  ;; :components #{'acme.bitterness} ;; all components in this ns
+                  ;; :components #{'acme.bitterness/bitter 'acme.sweetness/sweet} ;; just these 2
+                  ;; :components #{'acme.bitterness 'acme.sweetness/sweet} ;; all bitter, one sweet
+                  ;; :source-paths #{"src/demos"}
+                  :polyfill :lite
+                  ;; :verbose true
+                  ;; :pprint true)
+                  :debug true)))
+
+(deftask app
+  [p page PAGE sym   "App page to compile."]
+  (comp
+   (boot/sift     :to-source #{#".*clj"})
+   ;; optional: keep the lib source:
+   (boot/sift     :to-resource #{#"widgets.clj"})
+   (miraj/compile :pages #{page}
+                  :polyfill :lite
+                  :debug true)))

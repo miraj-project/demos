@@ -1,0 +1,10 @@
+/* sweetness/sweetest.css */
+
+/* This will be auto-detected and inserted into the template element of */
+/* the sweetness/sweetest component codom. */
+
+#foo {color: red;}
+
+:host {text-align: center;margin: 0 auto;}
+
+

@@ -6,7 +6,7 @@
             [miraj.polymer.paper :as paper]
              :reload))
 
-(println "loading acme")
+;; (println "loading acme")
 
 ;; in the lib, this will be exported as acme.widgets/simple
 (miraj/defcomponent simple :html hello-simple
@@ -27,28 +27,9 @@
 
 (miraj/deflibrary widgets
   "Miraj component library: acme.widgets"
-  #:miraj{:require '[;[acme :export :all]
-                     ;[acme.bitterness :export :all]
+  #:miraj{:require '[[acme :export :all]
+                     [acme.bitterness :export :all]
                      [acme.sweetness :export :all]]
           :defelements true})
 
-(println "loaded acme")
-
-;; for testing:
-
-;; (def nss (-> *ns* ns-name))
-
-;; (do  ;; miraj/compile :component  #{'miraj.demo.greeting 'miraj.demo.adieu}
-;;   (require '[miraj.compiler :as wc] :reload)
-;;   (binding [*compile-path* "tmp"]
-;;     (wc/compile-webcomponent-nss :html #{'miraj.demo.greeting 'miraj.demo.adieu} true true)
-;;     (wc/compile-webcomponent-nss :cljs #{'miraj.demo.greeting 'miraj.demo.adieu} true true)))
-
-;; ;; for dev, disable stencil cache:
-;; (stencil.loader/set-cache (clojure.core.cache/ttl-cache-factory {} :ttl 0))
-
-;; (do
-;;   (require '[miraj.compiler :as wc] :reload)
-;;   (binding [*compile-path* "tmp"]
-;;     (wc/link-component-libs #{nss} true)))
-
+;; (println "loaded acme")

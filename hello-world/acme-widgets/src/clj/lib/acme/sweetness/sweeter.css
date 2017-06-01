@@ -1,0 +1,14 @@
+/* sweetness/sweeter.css */
+
+/* This will be auto-detected and inserted into the <template> element of */
+/* the sweetness/sweeter component codom. */
+
+.sweeter {border: thin solid green;}
+
+.bar {color: red;}
+
+paper-card {text-align: center;
+	    padding: 12px;
+	    --paper-card-header-text: {font-family:Sans-Serif;};
+	    --paper-card-header: {background-color:#84FFFF;};  /* cyan-A100 */
+	    --paper-card-background-color:#FFECB3;} /* amber-100 */
