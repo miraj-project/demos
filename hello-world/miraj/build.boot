@@ -5,14 +5,14 @@
  :asset-paths #{"resources/public"}
  :source-paths   #{"src/clj"}
 
- ;; :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
- ;;              [miraj/core "0.1.0-SNAPSHOT"]
+ :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
+              [miraj/core "1.0.0-SNAPSHOT"]]
  ;;              [miraj/html "5.1.0-SNAPSHOT"]]
 
- :dependencies   '[[org.clojure/clojure "RELEASE"]
+ :dependencies   '[[org.clojure/clojure "1.9.0-alpha17"]
                    [org.clojure/clojurescript "RELEASE"]
                    [miraj/co-dom "1.0.0-SNAPSHOT"]
-                   [miraj/core "0.1.0-SNAPSHOT"]
+                   [miraj/core "1.0.0-SNAPSHOT"]
                    [miraj/html "5.1.0-SNAPSHOT"]
 
                    [adzerk/boot-cljs "2.0.0" :scope "test"]
@@ -66,7 +66,7 @@
                          :debug true))))
 
 (deftask sweet
-  "repl development."
+  "compile page sweet"
   []
   (let [pg 'miraj.demos.hello-world.miraj.sweet]
     (comp (miraj/compile :pages #{pg}

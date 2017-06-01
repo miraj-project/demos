@@ -17,7 +17,7 @@
    ;; {:custom "button { color:green; width: 50%; margin: 16px;}"}
 
    ;; raw path syntax
-   ;; ["/css/bitter.css" "/css/bitter2.css"]
+   ["/css/bitter.css" "/css/bitter2.css"]
 
    ;; style modules with custom styles (:custom required for main doc css)
    ;; [styles.modules :custom [foo bar]]

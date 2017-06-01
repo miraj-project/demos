@@ -1,9 +1,7 @@
 (ns miraj.demos.hello-world.miraj.sweet
   (:refer-clojure :exclude [map meta time])
   (:require [miraj.core :as miraj]
-            [miraj.html :as h :refer :all :exclude [meta]]
-            [miraj.co-dom :as codom :refer [pprint serialize]]
-            :reload))
+            [miraj.html :as h :refer :all :exclude [meta]]))
 
 (miraj/defpage
   "Hello, Sweet Miraj World"

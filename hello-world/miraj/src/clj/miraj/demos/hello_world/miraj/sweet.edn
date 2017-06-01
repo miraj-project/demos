@@ -8,7 +8,7 @@
        ;; {:custom "button { background:red; width: 50%; margin: 16px;}"}
 
        ;; raw path syntax
-       ;; ["/css/sweet.css" "/css/sweet2.css"]
+       ["/css/sweet.css" "/css/sweet2.css"]
 
        ;; style modules with custom styles (:custom required for main doc css)
        ;; [styles.modules :custom [foo bar]]

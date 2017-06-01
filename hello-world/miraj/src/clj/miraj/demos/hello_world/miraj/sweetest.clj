@@ -1,14 +1,10 @@
 (ns miraj.demos.hello-world.miraj.sweetest
   (:refer-clojure :exclude [map meta time])
   (:require [miraj.core :as miraj]
-            [miraj.html :as h :refer :all :exclude [meta]]
-            [miraj.co-dom :as codom :refer [pprint serialize]]))
+            [miraj.html :as h :refer :all :exclude [meta]]))
 
 (miraj/defpage
   "Hello, Sweetest Miraj World"
-
-   ;; Alas, HTML import won't work for imported cljs, so we must be explicit:
-   (:js ["sweetest.js"])
 
   {::h/title "Hello, Sweetest Miraj World"
    ::h/description "This page demonstrates of a simple miraj webpage."

@@ -1,2 +1,0 @@
-;; sweetest/deps.edn
-{:imports  [imports.sweetest]}

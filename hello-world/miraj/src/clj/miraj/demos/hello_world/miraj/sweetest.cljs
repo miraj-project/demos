@@ -1,4 +1,4 @@
-(ns miraj.demos.hello-world.miraj.sweetest.core)
+(ns miraj.demos.hello-world.miraj.sweetest)
 
 (enable-console-print!)
 
