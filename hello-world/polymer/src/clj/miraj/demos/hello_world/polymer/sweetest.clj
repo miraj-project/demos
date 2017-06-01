@@ -22,7 +22,7 @@
                          "Some content")
                     (div :.card-actions.centered
                          (paper/button :#sweetestbtn.centered?raised "Click me"))))))
- 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #_(binding [miraj/*debug* true
           miraj/*verbose* true

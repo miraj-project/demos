@@ -1,8 +1,8 @@
-(ns miraj.demos.hello-world.polymer.sweetest.core)
+(ns miraj.demos.hello-world.polymer.sweetest)
 
 (enable-console-print!)
 
-(println "Hello world from miraj.demos.hello-world.sweetest.core!")
+(println "Hello world from miraj.demos.hello-world.sweetest!")
 
 (let [btn (.getElementById js/document "sweetestbtn")]
   (.addEventListener btn "click"

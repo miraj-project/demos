@@ -6,13 +6,13 @@
  :source-paths   #{"src/clj"}
 
  ;; :checkouts '[[miraj/co-dom "1.0.0-SNAPSHOT"]
- ;;              [miraj/core "0.1.0-SNAPSHOT"]]
+ ;;              [miraj/core "1.0.0-SNAPSHOT"]]
 
  :dependencies   '[[org.clojure/clojure "RELEASE"]
                    ;; [org.clojure/spec.alpha "0.1.108"]
                    [miraj/co-dom "1.0.0-SNAPSHOT"]
+                   [miraj/core "1.0.0-SNAPSHOT"]
                    [miraj/html "5.1.0-SNAPSHOT"]
-                   [miraj/core "0.1.0-SNAPSHOT"]
 
                    [miraj.polymer/paper "1.2.3-SNAPSHOT"]
 
@@ -93,4 +93,3 @@
         (sweet)
         (sweeter)
         (sweetest)))
-

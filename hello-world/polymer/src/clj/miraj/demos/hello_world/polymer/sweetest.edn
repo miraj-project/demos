@@ -1,4 +1,4 @@
-;; sweetest/deps.edn
+;; sweetest.edn
 {:css [
        ;; ;; inlined css
        ;; "button { background:red; width: 50%; margin: 16px;}"
@@ -7,7 +7,7 @@
        ;; {:custom "button { background:red; width: 50%; margin: 16px;}"}
 
        ;; raw path syntax
-       ["/css/sweet.css"]
+       ["/css/sweetest.css"]
 
        ;; style modules (:custom required for main doc css)
        ;; [styles.modules :custom [foo bar]] ;; modules foo, bar in /styles/modules.html
@@ -32,7 +32,7 @@
        ]
 
  :miraj.polymer/styles [[miraj.polymer.iron.styles demo flex-mixins]
-                        [miraj.polymer.paper.styles color typography]]}
+                        [miraj.polymer.paper.styles color typography]]
 
  ;; :imports [imports.sweetest]
 
