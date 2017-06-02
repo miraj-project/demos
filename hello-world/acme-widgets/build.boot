@@ -175,15 +175,14 @@
 
 (deftask lib []
   (comp
-   (miraj/link :libraries #{'acme/widgets}
-               ;; :verbose true
-               ;; :pprint true)
-               :debug true)
    (miraj/compile :components #{}
                   ;; :keep true
                   ;; :pprint true
                   :debug true)
-   (cljs)))
+   (miraj/link :libraries #{'acme/widgets}
+               ;; :verbose true
+               ;; :pprint true)
+               :debug true)))
 
 (deftask index []
   (let [pg 'index]
@@ -196,17 +195,12 @@
      (cljs))))
 
 (deftask demo
-  [p page PAGE sym   "Demo page to compile."]
-  (println "PAGE: " page)
+  []
   (comp
-   (miraj/link :libraries #{'acme/widgets}
-               ;; :verbose true
-               ;; :pprint true)
-               :debug true)
    (cljs)
    (miraj/compile :demo 'acme.widgets
-                  ;; :components #{} ;; all
-                  :components #{'acme.sweetness/sweetest} ;; just this one
+                  :components #{} ;; all
+                  ;; :components #{'acme.sweetness/sweetest} ;; just this one
                   ;; :components #{'acme.bitterness} ;; all components in this ns
                   ;; :components #{'acme.bitterness/bitter 'acme.sweetness/sweet} ;; just these 2
                   ;; :components #{'acme.bitterness 'acme.sweetness/sweet} ;; all bitter, one sweet
