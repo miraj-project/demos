@@ -1,0 +1,10 @@
+/* psk/widgets/greeting.css */
+
+:host {
+    display: block;
+}
+
+span,
+input {
+    @apply(--paper-font-body2);
+}
