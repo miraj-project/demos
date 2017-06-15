@@ -14,9 +14,10 @@
 
 ;; (println "loading acme.bitterness")
 
+
 ;; in the lib, this will be exported as acme.widgets/bitterest
 (miraj/defcomponent bitterest :html acme-bitterest
-  "bitter"
+  "bitterest"
   (:codom
    (h/div
     (h/h1 "Bitterest Component!"))))
@@ -28,24 +29,13 @@
 
 ;; to be exported as acme.widgets/bitter
 (miraj/defcomponent bitter :html acme-bitter
-  "Custom button component"
+  "bitter"
 
-  ;;(:require [miraj.polymer.paper :as paper])
   (:codom
    (h/style ":host {display: block; width: 50%; border:thick blue solid;}
  span {background-color:#E0F2F1;}")
    (h/style ":host h1, :host h2 {text-align:center;}")
-   (h/h1 "BITTER!")
-
-   (h/div (h/h4 "Another Fine Bitter Message!"))
-   (h/div (p/bind! :message)) ;; 1-way binding [[message]]
-   (h/div :#special.page-title
-          (h/span (p/bind!! :greeting)) ;; {{greeting}}, 2-way binding
-          (h/span ", ")
-          (h/span (p/bind!! :addressee)))
-   (h/span "UPDATE text to change the greeting.")
-   (h/input {:class "paper-font-body2" :value (p/bind!! :input->greeting)})
-   (h/input {:class "paper-font-body2" :value (p/bind!! :input->addressee)}))
+   (h/h1 "BITTER!"))
 
   ;; polymer prototype
   {:polymer/properties {:greeting ^String{:value "hello"

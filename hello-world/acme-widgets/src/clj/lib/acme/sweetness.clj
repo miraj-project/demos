@@ -1,6 +1,6 @@
 (ns acme.sweetness
-  (:require [clojure.java.io :as io]
-            [clojure.pprint :as pp]
+  (:require ;;[clojure.java.io :as io]
+            ;;[clojure.pprint :as pp]
             [miraj.core :as miraj]
             [miraj.html :as h]
             [miraj.html.protocols :as hp]
@@ -9,7 +9,7 @@
             ;; [miraj.polymer.paper :as paper]
 
             ;; for testing only:
-            [miraj.co-dom :as codom]
+            ;; [miraj.co-dom :as codom]
             #_:reload))
 
 ;; (println "loading acme.sweetness")
@@ -167,7 +167,6 @@
   (mouseover [e] (this-as this (sweeter/mouseover this e)))
   )
 
- 
 ;; sweetest - manage all non-lexical dependencies externally (via <component>.edn file)[
 (miraj/defcomponent sweetest :html acme-sweetest
   "sweetest"
@@ -177,10 +176,7 @@
   ;; css:  ./sweetest.css will be auto-detected and injected
 
   (:codom
-   (h/style ":host {display: block; width: 50%; border:thick blue solid;}
-  span {background-color:#E0F2F1;}")
-   (h/style ":host h1, :host h2 {text-align:center;}")
-   (h/h1 :#foo "Sweetest!")
+   (h/h1 "Sweetest!")
 
    (h/div (h/h4 "Another Fine, Sweet Message!"))
    (h/div (p/bind! :message)) ;; 1-way binding, [[message]]

@@ -8,8 +8,6 @@
  ;; :resource-paths #{"resources"}
  ;; :target-path "resources/public"
 
- ;; :repositories #(conj % ["clojars" {:url "https://clojars.org/repo/"}])
-
  :checkouts '[[miraj/core "1.0.0-SNAPSHOT"]
               [miraj/polymer "1.0.0-SNAPSHOT"]
               ;; testing
@@ -213,9 +211,9 @@
 (deftask app
   [p page PAGE sym   "App page to compile."]
   (comp
-   (boot/sift     :to-source #{#".*clj"})
+   ;; (boot/sift     :to-source #{#".*clj"})
    ;; optional: keep the lib source:
-   (boot/sift     :to-resource #{#"widgets.clj"})
+   ;; (boot/sift     :to-resource #{#"widgets.clj"})
    (miraj/compile :pages #{page}
                   :polyfill :lite
                   :debug true)))

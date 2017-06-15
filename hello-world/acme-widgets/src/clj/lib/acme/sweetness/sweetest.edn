@@ -1,14 +1,16 @@
 ;; sweetness/sweetest.edn - external dependencies for component sweetness/sweetest
 
-{:css [
+{:miraj.polymer/styles [[miraj.polymer.iron.styles flex-mixins]
+                        [miraj.polymer.paper.styles color typography]]
+ :css [
        ;; ;; inlined css
-       ;; "button { background:red; width: 50%; margin: 16px;}"
+       "h1 {@apply --paper-font-headline;}"
 
        ;; ;; inlined, custom style
        ;; {:custom "button { background:red; width: 50%; margin: 16px;}"}
 
        ;; raw path syntax
-       ["/css/sweetest.css"]
+       ["/css/sweetest.css" "/css/sweeter.css"]
 
        ;; style modules (:custom required for main doc css)
        ;; [styles.modules :custom [foo bar]] ;; modules foo, bar in /styles/modules.html
@@ -30,7 +32,4 @@
        ;;  :integrity "sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
        ;;  :crossorigin "anonymous"}
        ;; {:href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"}
-       ]
-
- :miraj.polymer/styles [[miraj.polymer.iron.styles demo flex-mixins]
-                        [miraj.polymer.paper.styles color typography]]}
+       ]}

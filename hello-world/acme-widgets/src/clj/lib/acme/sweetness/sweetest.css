@@ -3,8 +3,14 @@
 /* This will be auto-detected and inserted into the template element of */
 /* the sweetness/sweetest component codom. */
 
-#foo {color: red;}
+:host {text-align: center;margin: 0 auto;display: block; border:thick blue solid;}
 
-:host {text-align: center;margin: 0 auto;}
+h1 {text-align:center;}
 
+/* the --paper-x stuff is from Polymer paper-styles, which must be imported in sweetest.edn */
 
+h4 {text-align:center;background:var(--paper-teal-100);@apply --paper-font-subhead;}
+
+.page-title {@apply --paper-font-title; background:var(--paper-orange-300);}
+
+span {background-color:#E0F2F1;}

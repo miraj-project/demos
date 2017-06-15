@@ -17,43 +17,33 @@ It's useful to distinguish several kinds of namespaces:
 
 This allows us to put large numbers of components into a library
 without crowding the implementation namespace.  If we were to use the
-library namespace - in this example, miraj.demos.papyrus - as the
+library namespace - in this example, acme - as the
 implementation namespace, then we would have to shoehorn all of our
-defcomponent code into `miraj/demos/papyrus.clj`.  By separating
+defcomponent code into `acme.clj`.  By separating
 implementation namespaces from library namespace, we can distribute
 our defcomponent code across however many implementation spaces we
 need.
 
+NOTE: In this demo, we also put some defcomponents into the library
+namespace.  This is possible but not recommended.
+
 Implementation namespaces may again contain multiple instances of
-defcomponent, but for simplicity's sake we follow the convention of
-one defcomponent per implementation namespace.  We name the
-implementation after the HTML tag of the component; for example, we
-put `defcomponent hello-world :using hello` in
-`miraj.demos.papyrus.hello_world.clj`.
+defcomponent; in this demo, we define three components per component space.
+one defcomponent per implementation namespace.
+
+Note also that you can use any html tag for your components, so long
+as it contains at least one dash.
 
 == building
 
 === compile components
 
+WARNING: Some of this documentation is outdated; see the tasks in
+build.boot for better guidance.
+
 Component compilation generates the html and cljs files that
-implement the webcomponent. For example, given
+implement the webcomponent.
 
-[source,clojure]
-----
-(ns miraj.demo.papyrus.button
-(defcomponent button :html papyrus-button ...)
-----
-
-Then `$ boot miraj/compile --components` will yield:
-
-[source,shell]
-----
-miraj/demo/papyrus/button/papyrus-button.cljs
-miraj/demo/papyrus/button/papyrus-button.html
-----
-
-Here the definition namespace is `miraj.demo.papyrus.button`, and the
-implementation namespace is `miraj.demo.papyrus.button.papyrus-button`.
 
 === link libraries
 
@@ -62,25 +52,21 @@ used. Libraries are defined using `deflibrary`. This names the library
 and lists the component definition namespaces assembled into the
 library.  For example:
 
-.miraj.demo.clj
+.acme.clj
 [source,clojure]
 ----
-(ns miraj.demo ...)
-(miraj/deflibrary papyrus
-  "Miraj component library: miraj.demo.papyrus"
-  #:miraj{:require '[[miraj.demo.papyrus.button :export :all]
-                     [miraj.demo.papyrus.card :export :all]]
+(ns acme ...)
+(deflibrary widgets
+  "Miraj component library: acme.widgets"
+  #:miraj{:require '[[acme :export :all]
+                     [acme.bitterness :export :all]
+                     [acme.sweetness :export :all]]
           :defelements true})
 ----
 
 IMPORTANT: The namespaces listed in the `:require` vector must be
 _definition_ namespaces (i.e. Clojure namespaces), not
-_implementation_ namespaces.
-
-Given the above, `$ boot miraj/link --libraries` will yield
-`miraj/demo/papyrus.clj`, which will contain one element function per
-component.
-
+_implementation_ pathspaces.
 
 === compile and link pages
 
@@ -185,6 +171,8 @@ a page in the repo.
 
 
 == component demos
+
+WARNING:  This doc is a little outdated.  See the demo task in build.boot instead.
 
 Miraj makes it easy to create demo pages for your components.  Just
 create a demo pages using defpage in your library.  If your library
