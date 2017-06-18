@@ -38,7 +38,7 @@ as it contains at least one dash.
 
 Build the demo page: `$ boot monitor lib demo target`
 
-Build the app:  `$ boot monitor lib app -p index target`
+Build the app:  `$ boot monitor lib app -p index cljs target`
 
 === compile components
 
