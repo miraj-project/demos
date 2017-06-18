@@ -8,13 +8,13 @@
  ;; :resource-paths #{"resources"}
  ;; :target-path "resources/public"
 
- :checkouts '[[miraj/core "1.0.0-SNAPSHOT"]
-              [miraj/polymer "1.0.0-SNAPSHOT"]
-              ;; testing
-              [miraj/co-dom "1.0.0-SNAPSHOT"] ;; test?
-              ;; [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
-              ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
-              [miraj/boot-miraj "0.1.0-SNAPSHOT"]]
+ ;; :checkouts '[[miraj/core "1.0.0-SNAPSHOT"]
+ ;;              [miraj/polymer "1.0.0-SNAPSHOT"]
+ ;;              ;; testing
+ ;;              [miraj/co-dom "1.0.0-SNAPSHOT"] ;; test?
+ ;;              ;; [adzerk/boot-cljs "2.0.0-OUTPUTFIX" :scope "test"]
+ ;;              ;; [tmp.components/greeter "0.1.0-SNAPSHOT"]
+ ;;              [miraj/boot-miraj "0.1.0-SNAPSHOT"]]
 
  :dependencies '[[org.clojure/clojure "1.9.0-alpha17"]
                  [org.clojure/tools.namespace "0.2.11"]
@@ -211,9 +211,9 @@
 (deftask app
   [p page PAGE sym   "App page to compile."]
   (comp
-   ;; (boot/sift     :to-source #{#".*clj"})
+   (boot/sift     :to-source #{#".*clj"})
    ;; optional: keep the lib source:
    ;; (boot/sift     :to-resource #{#"widgets.clj"})
-   (miraj/compile :pages #{page}
+   (miraj/compile :pages #{'index}
                   :polyfill :lite
                   :debug true)))

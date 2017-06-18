@@ -6,7 +6,7 @@
             ;; [miraj.core :as wc]
             ;; [miraj.co-dom :as x]
             :reload))
-      
+
 (println "loading index")
 
 (miraj/defpage
@@ -31,21 +31,6 @@
    (h/div
     (h/h2 "Here's a Polymer paper-card:")
     (paper/card (h/div "Hi there")))
-
-   (h/div
-    (h/h2 "Here's a simple component:")
-    (h/div {:miraj.style/border "thick black solid;"}
-           (acme/simple)))
-
-   (h/div
-    (h/h2 "Here's a simpler component:")
-    (h/div {:miraj.style/border "thick black solid;"}
-           (acme/simpler)))
-
-   (h/div
-    (h/h2 "Here's a simplest component:")
-    (h/div {:miraj.style/border "thick black solid;"}
-           (acme/simplest)))
 
    (h/div
     (h/h2 "Here's a bitter component:")

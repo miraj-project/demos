@@ -36,6 +36,10 @@ as it contains at least one dash.
 
 == building
 
+Build the demo page: `$ boot monitor lib demo target`
+
+Build the app:  `$ boot monitor lib app -p index target`
+
 === compile components
 
 WARNING: Some of this documentation is outdated; see the tasks in
