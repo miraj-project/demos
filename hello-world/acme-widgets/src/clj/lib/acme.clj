@@ -7,8 +7,7 @@
 
 (deflibrary widgets
   "Miraj component library: acme.widgets"
-  #:miraj{:require '[[acme :export :all]
-                     [acme.bitterness :export :all]
+  #:miraj{:require '[[acme.bitterness :export :all]
                      [acme.sweetness :export :all]]
           :defelements true})
 
