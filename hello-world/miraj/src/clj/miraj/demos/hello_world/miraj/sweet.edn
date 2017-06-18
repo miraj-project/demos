@@ -1,4 +1,4 @@
-;; sweet/deps.edn
+;; sweet.edn
 
 {:css [
        ;; ;; inlined css

@@ -7,7 +7,7 @@ The demos are designed to be read in the following order:
 1. html
 2. miraj
 3. polymer
-4. components
+4. acme-widgets
 
 To build:
 
