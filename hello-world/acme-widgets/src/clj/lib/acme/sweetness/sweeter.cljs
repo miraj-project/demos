@@ -31,9 +31,9 @@
 (defn observe-greeting
   [new old] (println "OBSERVING:" old new))
 
-(defn greeting-flavor-observer [greeting flavor]
+(defn greeting-flavor-observer [this greeting flavor]
                    (println "cljs sweeter greeting-flavor-observer: " greeting ", " flavor)
-                   (this-as this (set! (.-message this) (str greeting ", " flavor " ()"))))
+                   (set! (.-message this) (str greeting ", " flavor " ()")))
 
 
 (def msg "HOWDY")

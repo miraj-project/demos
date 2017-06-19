@@ -22,10 +22,9 @@
 
 (defn observe-greeting [old new] (println (str "OBSERVING sweetest: old: " old ", new:" new)))
 
-(defn complex-observer [greeting addressee]
-                   (.log js/console "Compound sweetest observation: " greeting ", " addressee)
-                   (this-as this (set! (.-foo this) (str greeting ", " addressee " ()"))))
-
+(defn complex-observer [this greeting addressee]
+  (.log js/console "Compound sweetest observation: " greeting ", " addressee)
+  (set! (.-foo this) (str greeting ", " addressee " ()")))
 
 (def msg "HOWDY")
 (defn greet [] "HELLO msg")

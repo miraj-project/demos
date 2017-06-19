@@ -81,7 +81,7 @@
    ;; https://www.polymer-project.org/1.0/docs/devguide/observers#complex-observers
    :greeting-flavor-observer (fn [:greeting :flavor]
                                ;; pass the args as syms
-                               (sweet/greeting-flavor-observer greeting flavor))
+                               (this-as this (sweet/greeting-flavor-observer this greeting flavor)))
 
    ;; local properties - we can put them in the prototype, or in a cljs namespace
    ;; for polymer binding, they must be in the prototype
@@ -155,7 +155,8 @@
 
    :greeting-flavor-observer (fn [:greeting :flavor]
                                ;; pass the args as syms
-                               (sweeter/greeting-flavor-observer greeting flavor))
+                               (this-as this
+                                 (sweeter/greeting-flavor-observer this greeting flavor)))
 
    :name {:last "Smith"
           :first "John"}
