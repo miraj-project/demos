@@ -22,7 +22,7 @@
     ;; Listens for "input" event and sets greeting to <input>.value
     (h/input :#greeting-input {:value (p/bind!! :input->greeting)}))
 
-  {:polymer/properties {:greeting ^String{:value "Welcome"
+  {:polymer/properties {:greeting ^String{:value "Welcome!"
                                           :type String
                                           :notify :true}}}
   miraj.polymer.protocols/Lifecycle
@@ -35,7 +35,8 @@
   (:codom
    (h/ul
       ;; <template is="dom-repeat" items="{{items}}">
-    (p/repeat {:items (p/bind!! :items)}
+    ;; (p/repeat {:items (p/bind!! :items)}
+    (h/template {:is "dom-repeat" :items (p/bind!! :items)}
               (h/li (h/span (p/bind!! :item))))))
 
   {:polymer/properties {:items ^Vector{:notify :true}}}

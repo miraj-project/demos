@@ -1,5 +1,0 @@
-{:miraj.polymer/styles [[miraj.polymer.iron.icons iron]
-                        [miraj.polymer.iron.styles flex-mixins]
-                        [miraj.polymer.paper.styles color typography]]
- :css [["/styles/main.css"]]}
-
