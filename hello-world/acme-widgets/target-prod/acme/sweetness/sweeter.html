@@ -1,0 +1,15 @@
+<link rel="import" href="/miraj/polymer/assets/polymer/polymer.html"><link rel="import" href="/miraj/polymer/assets/paper-button/paper-button.html"><link rel="import" href="/miraj/polymer/assets/paper-card/paper-card.html"><link rel="import" href="/miraj/polymer/assets/iron-icon/iron-icon.html"><dom-module id="acme-sweeter"><template><style>/* sweetness/sweeter.css */
+
+/* This will be auto-detected and inserted into the <template> element of */
+/* the sweetness/sweeter component codom. */
+
+.sweeter {border: thin solid green;}
+
+.bar {color: red;}
+
+paper-card {text-align: center;
+	    padding: 12px;
+	    --paper-card-header-text: {font-family:Sans-Serif;};
+	    --paper-card-header: {background-color:#84FFFF;};  /* cyan-A100 */
+	    --paper-card-background-color:#FFECB3;} /* amber-100 */
+</style><link rel="stylesheet" href="/css/sweeter.css"><div class="sweeter"><div stringattr1$="{{message}}">[[message]]</div><paper-card heading="{{flavor}}"><div id="foo"><span>Click count: {{click-count}}</span></div><div class="bar"><span>Mouseover count: {{mouseover-count}}</span></div><div><span>{{greeting}}, [[flavor]]</span><span><content></content></span></div></paper-card></div></template></dom-module>

@@ -1,0 +1,17 @@
+<link rel="import" href="/miraj/polymer/assets/polymer/polymer.html"><link rel="import" href="/miraj/polymer/assets/paper-styles/typography.html"><link rel="import" href="/miraj/polymer/assets/paper-styles/color.html"><link rel="import" href="/miraj/polymer/assets/iron-flex-layout/iron-flex-layout.html"><dom-module id="acme-sweetest"><template><style>h1 {@apply --paper-font-headline;}</style><link rel="stylesheet" href="/css/sweetest.css"><link rel="stylesheet" href="/css/sweeter.css"><style>/* sweetness/sweetest.css */
+
+/* This will be auto-detected and inserted into the template element of */
+/* the sweetness/sweetest component codom. */
+
+:host {text-align: center;margin: 0 auto;display: block; border:thick blue solid;}
+
+h1 {text-align:center;}
+
+/* the --paper-x stuff is from Polymer paper-styles, which must be imported in sweetest.edn */
+
+h4 {text-align:center;background:var(--paper-teal-100);@apply --paper-font-subhead;}
+
+.page-title {@apply --paper-font-title; background:var(--paper-orange-300);}
+
+span {background-color:#E0F2F1;}
+</style><h1>Sweetest!</h1><div><h4>Another Fine, Sweet Message!</h4></div><div>[[message]]</div><div id="special" class="page-title"><span>{{greeting}}</span><span>, </span><span>[[addressee]]</span></div><span>UPDATE text to change the greeting.</span><input value="{{greeting::input}}" class="paper-font-body2"><input value="{{addressee::input}}" class="paper-font-body2"></template></dom-module>

@@ -1,0 +1,3 @@
+;; index.edn
+
+{:css                   [["/demo.css"]]}

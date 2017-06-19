@@ -1,17 +1,13 @@
 (ns index
   (:require [miraj.core :as miraj]
-            [miraj.html :as h]
-            [acme.widgets :as acme :refer :all]
-            ;; for testing only:
-            ;; [miraj.core :as wc]
-            ;; [miraj.co-dom :as x]
-            :reload))
+            [miraj.html :as h]))
 
 (println "loading index")
 
 (miraj/defpage
   "Hello World Demo App."
-  (:require [miraj.polymer.paper :as paper :refer [card]])
+  (:require [miraj.polymer.paper :as paper :refer [card]]
+            [acme.widgets :as acme :refer :all])
 
   ;; html metadata first
   {::h/title "Miraj Demo App: Hello World"
@@ -23,11 +19,9 @@
   ;;  }
   ;;  h1 {text-align:center;}")
 
-  (:js ["main.js"])
-
   (:body
    (h/h1 "Hello World Demo App")
- 
+
    (h/div
     (h/h2 "Here's a Polymer paper-card:")
     (paper/card (h/div "Hi there")))

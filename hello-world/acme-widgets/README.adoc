@@ -40,6 +40,11 @@ Build the demo page: `$ boot monitor lib demo target`
 
 Build the app:  `$ boot monitor lib app -p index cljs target`
 
+Production build: in build.boot, set cljs optimizations to :advanced,
+dbg and keep to false, then run:
+
+`$ boot lib app cljs target serve -d "target" -p 3000 wait`
+
 === compile components
 
 WARNING: Some of this documentation is outdated; see the tasks in

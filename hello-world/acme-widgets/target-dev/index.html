@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="/miraj/polymer/assets/webcomponentsjs/webcomponents-lite.js"></script>
+        <title>Miraj Demo App: Hello World</title>
+        <meta content="this page demonstrates of a simple Miraj app." name="description">
+        <link rel="import" href="index/deps.html">
+        <link rel="import" href="/acme/sweetness/sweeter.html">
+        <link rel="import" href="/acme/sweetness/sweetest.html">
+        <link rel="import" href="/acme/sweetness/sweet.html">
+        <link rel="import" href="/acme/bitterness/bitterest.html">
+        <link rel="import" href="/acme/bitterness/bitterer.html">
+        <link rel="import" href="/acme/bitterness/bitter.html">
+        <link rel="import" href="/miraj/polymer/assets/paper-card/paper-card.html">
+        <base href="/">
+    </head>
+    <body>
+        <h1>Hello World Demo App</h1>
+        <div>
+            <h2>Here's a Polymer paper-card:</h2>
+            <paper-card>
+                <div>Hi there</div>
+            </paper-card>
+        </div>
+        <div>
+            <h2>Here's a bitter component:</h2>
+            <acme-bitter></acme-bitter>
+        </div>
+        <div>
+            <h2>Here's a bitterer component:</h2>
+            <div style="border:thick black solid;;">
+                <acme-bitterer></acme-bitterer>
+            </div>
+        </div>
+        <div>
+            <h2>Here's a bitterest component:</h2>
+            <div style="border:thick black solid;;">
+                <acme-bitterest></acme-bitterest>
+            </div>
+        </div>
+        <div>
+            <h2>Here's a sweet hello:</h2>
+            <acme-sweet></acme-sweet>
+        </div>
+        <div>
+            <h2>Here's sweeter:</h2>
+            <acme-sweeter></acme-sweeter>
+        </div>
+        <div>
+            <h2>Here's sweetest:</h2>
+            <acme-sweetest></acme-sweetest>
+        </div>
+        <script src="main.js"></script>
+        <script>if (!window.HTMLImports) {
+	document.dispatchEvent(new CustomEvent('WebComponentsReady', {bubbles: true}));
+	}</script>
+    </body>
+</html>

@@ -75,7 +75,15 @@
  pom {:project +project+
       :version +version+}
  jar {:manifest {"root" "miraj"}}
- repl {:port 8081})
+ repl {:port 8081}
+ cljs {:compiler-options {:language-in  :ecmascript5-strict
+                          :language-out :ecmascript5-strict}
+       :optimizations :none})
+
+(def dbg  true)
+(def keep true)
+;; (def dbg false)
+;; (def keep false)
 
 (deftask monitor
   "repl development."
@@ -90,28 +98,28 @@
   (comp (miraj/compile :components #{ 'acme.bitterness/bitter}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
 
 (deftask bitterer []
   (comp (miraj/compile :components #{ 'acme.bitterness/bitterer}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
 
 (deftask bitterest []
   (comp (miraj/compile :components #{ 'acme.bitterness/bitterest}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
 
 (deftask bitterness []
   (comp (miraj/compile :components #{ 'acme.bitterness}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
 
 (deftask hello []
@@ -136,51 +144,52 @@
   (comp (miraj/compile :components #{'acme.sweetness/sweet}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
 
 (deftask sweeter []
   (comp (miraj/compile :components #{'acme.sweetness/sweeter}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
 
 (deftask sweetest []
   (comp (miraj/compile :components #{'acme.sweetness/sweetest}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
 
 (deftask sweetness []
   (comp (miraj/compile :components #{'acme.sweetness/sweet 'acme.sweetness/sweeter}
                        ;; :verbose true
                        ;; :pprint true
-                       :debug true
+                       :debug dbg
                        )))
         ;; (miraj/link :libraries #{'acme/widgets}
         ;;             ;; :verbose true
         ;;             ;; :pprint true)
-        ;;             :debug true)
+        ;;             :debug dbg)
         ;; (miraj/compile :pages #{'sweetness}
         ;;                :source-paths #{"src/demos"}
         ;;                :polyfill :lite
         ;;                ;; :verbose true
         ;;                ;; :pprint true)
-        ;;                :debug true)
+        ;;                :debug dbg)
         ;; (cljs)))
 
 (deftask lib []
   (comp
    (miraj/compile :components #{}
-                  ;; :keep true
+                  :keep keep
                   ;; :pprint true
-                  :debug true)
+                  :debug dbg)
    (miraj/link :libraries #{'acme/widgets}
+               :keep keep
                ;; :verbose true
                ;; :pprint true)
-               :debug true)))
+               :debug dbg)))
 
 (deftask index []
   (let [pg 'index]
@@ -189,7 +198,7 @@
      (miraj/compile :pages #{'index}
                     :source-paths #{"src/demos"}
                     :polyfill :lite
-                    :debug true)
+                    :debug dbg)
      (cljs))))
 
 (deftask demo
@@ -206,7 +215,7 @@
                   :polyfill :lite
                   ;; :verbose true
                   ;; :pprint true)
-                  :debug true)))
+                  :debug dbg)))
 
 (deftask app
   [p page PAGE sym   "App page to compile."]
@@ -216,4 +225,8 @@
    ;; (boot/sift     :to-resource #{#"widgets.clj"})
    (miraj/compile :pages #{'index}
                   :polyfill :lite
-                  :debug true)))
+                  :keep keep
+                  :debug dbg)
+   (miraj/link :pages #{'index}
+               ;;:pprint false
+               :debug dbg)))
