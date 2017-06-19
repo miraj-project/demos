@@ -1,2 +1,8 @@
 = miraj examples
 
+
+WARNING: only the hello-world and psk1 demos are up-to-date.
+
+Start with the hello-world demos.
+
+The psk1 demo is a Miraj implementation of the https://github.com/PolymerElements/polymer-starter-kit/releases/tag/v1.3.0[Polymer Starter Kit v. 1.3.0].
